@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectPreview from '../../components/ProjectPreview.astro';
+import WorkflowSteps from '../../components/WorkflowSteps.astro';
+import { getProjects } from '../../lib/projects';
+const projects = await getProjects();
+---
+<BaseLayout title="Projects | Dhiaz Rafilianza" description="Visual experiments in deep learning and computer vision. Explore real results, the approach behind them, and the code.">
+  <div class="container projects-page">
+    <header class="page-intro"><h1>Projects.</h1><p>Practical experiments. Real outputs.<br />A closer look at how they work.</p></header>
+    {projects.map((project, projectIndex) => <section class="project-entry" aria-label={project.data.title}><ProjectPreview project={project} priority={projectIndex === 0} />{project.data.steps.length > 0 && <div class="workflow"><WorkflowSteps steps={project.data.steps} /></div>}</section>)}
+  </div>
+</BaseLayout>
+<style>
+  .projects-page { padding-bottom: var(--space-5); }
+  .page-intro { display: flex; justify-content: space-between; align-items: end; gap: 2rem; padding-block: var(--space-4) var(--space-6); }
+  .page-intro h1 { font-size: clamp(3rem, 6vw, 5.5rem); }
+  .page-intro p { font-size: var(--text-lead); color: var(--color-muted); }
+  .project-entry + .project-entry { margin-top: var(--space-7); }
+  .workflow { margin-top: var(--space-5); background: var(--color-surface); padding: var(--space-4); }
+  @media (max-width: 750px) { .page-intro { display: block; padding-block: 1.5rem 2.5rem; } .page-intro p { margin-top: 1rem; } .workflow { padding: var(--space-3); } }
+</style>

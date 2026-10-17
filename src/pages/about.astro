@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ArrowIcon from '../components/ArrowIcon.astro';
+---
+<BaseLayout title="About | Dhiaz Rafilianza" description="Muhammad Dhiaz Rafilianza explores deep learning, computer vision, and diffusion models through practical experiments.">
+  <section class="container about-page" aria-labelledby="about-heading">
+    <div class="about-intro"><h1 id="about-heading">Learning through<br />making.</h1><p>I’m Muhammad Dhiaz Rafilianza.<br />You can call me Dhiaz.</p></div>
+    <div class="about-body">
+      <div class="about-copy"><p>I’m interested in how deep learning models understand and generate visual information.</p><p>My projects are a way to explore those ideas: connect existing tools, inspect the results, and learn from what works—and what doesn’t.</p><a class="button" href="/projects/">Explore my projects <ArrowIcon /></a></div>
+      <aside class="interests" aria-labelledby="interests-heading"><h2 id="interests-heading">What I explore</h2><ul><li>Deep learning</li><li>Computer vision</li><li>Diffusion models</li></ul><a class="text-link" href="https://github.com/Rafilianza">Find me on GitHub</a></aside>
+    </div>
+  </section>
+</BaseLayout>
+<style>
+  .about-page { padding-block: var(--space-4) var(--space-6); }
+  .about-intro { display: grid; grid-template-columns: 1.35fr 1fr; align-items: end; gap: var(--space-4); margin-bottom: var(--space-6); }
+  .about-intro h1 { font-size: clamp(3rem, 6vw, 5.5rem); }
+  .about-intro p { font-size: var(--text-lead); color: var(--color-muted); }
+  .about-body { display: grid; grid-template-columns: 1.35fr 1fr; gap: var(--space-6); align-items: start; }
+  .about-copy { max-width: 51ch; font-size: var(--text-lead); }
+  .about-copy p + p { margin-top: var(--space-3); }
+  .about-copy .button { margin-top: var(--space-4); }
+  .interests { padding: var(--space-4); background: var(--color-surface); }
+  .interests h2 { font-size: 2rem; }
+  .interests ul { list-style: none; margin: var(--space-3) 0; padding: 0; }
+  .interests li + li { margin-top: 0.5rem; }
+  @media (max-width: 750px) { .about-intro, .about-body { grid-template-columns: 1fr; gap: var(--space-4); } .about-intro { margin-bottom: var(--space-4); } .about-page { padding-top: var(--space-3); } }
+</style>

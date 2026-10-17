@@ -1,0 +1,91 @@
+---
+import type { ImageMetadata } from 'astro';
+interface View {
+  label: string;
+  src: ImageMetadata;
+  alt: string;
+  caption?: string;
+}
+interface Props {
+  id: string;
+  title: string;
+  description?: string;
+  views: View[];
+  initialView?: number;
+  eager?: boolean;
+}
+const { id, title, description, views, initialView = 0, eager = false } = Astro.props;
+const selectedView = Math.min(Math.max(initialView, 0), views.length - 1);
+---
+<image-viewer data-initial-view={selectedView}>
+  <div class="viewer-toolbar">
+    <p class="viewer-title" id={`${id}-title`}>{title}</p>
+    <fieldset hidden aria-describedby={description ? `${id}-description` : undefined}>
+      <legend class="visually-hidden">Saved image view</legend>
+      {views.map((view, viewIndex) => (
+        <label>
+          <input type="radio" name={`${id}-view`} value={viewIndex} checked={viewIndex === selectedView} aria-controls={`${id}-figure-${viewIndex}`} />
+          <span>{view.label}</span>
+        </label>
+      ))}
+    </fieldset>
+  </div>
+  {description && <p class="viewer-description" id={`${id}-description`}>{description}</p>}
+  <div class="viewer-figures">
+    {views.map((view, viewIndex) => (
+      <figure id={`${id}-figure-${viewIndex}`}>
+        <div class="image-stage">
+          <img src={view.src.src} width={view.src.width} height={view.src.height} alt={view.alt} loading={eager && viewIndex === selectedView ? 'eager' : 'lazy'} fetchpriority={eager && viewIndex === selectedView ? 'high' : 'auto'} decoding="async" />
+        </div>
+        <figcaption><span class="view-label">{view.label}.</span> {view.caption}</figcaption>
+      </figure>
+    ))}
+  </div>
+</image-viewer>
+
+<script>
+  // Without JavaScript, every saved figure remains available in document order.
+  class ImageViewer extends HTMLElement {
+    connectedCallback() {
+      const controls = this.querySelector('fieldset');
+      const figures = this.querySelectorAll('figure');
+      const inputs = this.querySelectorAll<HTMLInputElement>('input[type="radio"]');
+      if (!controls || figures.length === 0) return;
+
+      const selectView = (selectedIndex: number) => {
+        figures.forEach((figure, figureIndex) => {
+          figure.hidden = figureIndex !== selectedIndex;
+        });
+      };
+
+      selectView(Number(this.dataset.initialView ?? 0));
+      controls.hidden = false;
+      this.classList.add('enhanced');
+      inputs.forEach((input) => {
+        input.addEventListener('change', () => selectView(Number(input.value)));
+      });
+    }
+  }
+  if (!customElements.get('image-viewer')) customElements.define('image-viewer', ImageViewer);
+</script>
+
+<style>
+  image-viewer { display: block; min-width: 0; }
+  .viewer-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1rem; }
+  .viewer-title { font-size: var(--text-small); color: var(--color-muted); }
+  fieldset { display: flex; flex-wrap: wrap; gap: 0.25rem; border: 0; padding: 0.25rem; margin: 0; background: var(--color-surface); border-radius: var(--radius-control); }
+  label { position: relative; cursor: pointer; }
+  input { position: absolute; inset: 0; opacity: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
+  label span { display: flex; align-items: center; justify-content: center; min-height: 44px; padding: 0.5rem 0.95rem; border-radius: var(--radius-control); font-size: var(--text-small); font-weight: 500; }
+  input:checked + span { color: var(--color-paper); background: var(--color-pine); }
+  input:focus-visible + span { outline: 3px solid var(--color-pine); outline-offset: 3px; }
+  .viewer-description { margin-bottom: 1rem; max-width: 70ch; color: var(--color-muted); font-size: var(--text-small); }
+  figure + figure { margin-top: 1.5rem; }
+  .enhanced figure { margin-top: 0; }
+  .image-stage { display: flex; align-items: center; justify-content: center; aspect-ratio: 3 / 2; background: var(--color-white); overflow: hidden; }
+  .image-stage img { width: 100%; height: 100%; object-fit: contain; }
+  figcaption { margin-top: 0.75rem; font-size: var(--text-small); line-height: 1.5; color: var(--color-muted); max-width: 80ch; min-height: 3em; }
+  .view-label { color: var(--color-ink); font-weight: 550; }
+  @media (hover: hover) and (pointer: fine) { input:not(:checked):hover + span { color: var(--color-pine); background: var(--color-paper); } }
+  @media (max-width: 640px) { label span { padding-inline: 0.8rem; } .viewer-toolbar { gap: 0.5rem; } }
+</style>

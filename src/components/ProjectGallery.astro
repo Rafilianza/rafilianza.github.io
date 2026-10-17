@@ -1,0 +1,27 @@
+---
+import type { CollectionEntry } from 'astro:content';
+interface Props { images: CollectionEntry<'projects'>['data']['gallery']; }
+const { images } = Astro.props;
+---
+{images.length > 0 && (
+  <section class="gallery" aria-labelledby="gallery-heading">
+    <div class="gallery-intro"><h2 id="gallery-heading">A closer look</h2><p class="muted">Saved examples, with their imperfections intact.</p></div>
+    <div class="gallery-grid">
+      {images.map((image) => (
+        <figure>
+          <div class="gallery-image"><img src={image.src.src} width={image.src.width} height={image.src.height} alt={image.alt} loading="lazy" decoding="async" /></div>
+          {image.caption && <figcaption>{image.caption}</figcaption>}
+        </figure>
+      ))}
+    </div>
+  </section>
+)}
+<style>
+  .gallery { margin-block: var(--space-7); }
+  .gallery-intro { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 1rem; margin-bottom: var(--space-4); }
+  .gallery-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-5); }
+  .gallery-image { aspect-ratio: 4 / 3; display: flex; background: var(--color-white); }
+  img { width: 100%; height: 100%; object-fit: contain; }
+  figcaption { color: var(--color-muted); margin-top: var(--space-2); font-size: 1rem; max-width: 65ch; }
+  @media (max-width: 720px) { .gallery { margin-block: var(--space-6); } .gallery-grid { grid-template-columns: 1fr; gap: var(--space-4); } }
+</style>

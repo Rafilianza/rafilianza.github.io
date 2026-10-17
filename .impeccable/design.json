@@ -1,0 +1,279 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-17T01:45:31Z",
+  "title": "Design System: Muhammad Dhiaz Rafilianza",
+  "extensions": {
+    "colorMeta": {
+      "paper": {
+        "role": "neutral",
+        "displayName": "Charcoal Paper",
+        "tonalRamp": [
+          "oklch(15% 0.0107 163.76)",
+          "oklch(26% 0.0107 163.76)",
+          "oklch(38% 0.0107 163.76)",
+          "oklch(49% 0.0107 163.76)",
+          "oklch(61% 0.0107 163.76)",
+          "oklch(72% 0.0107 163.76)",
+          "oklch(84% 0.0107 163.76)",
+          "oklch(95% 0.0107 163.76)"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Forest Surface",
+        "tonalRamp": [
+          "oklch(15% 0.0178 158.64)",
+          "oklch(26% 0.0178 158.64)",
+          "oklch(38% 0.0178 158.64)",
+          "oklch(49% 0.0178 158.64)",
+          "oklch(61% 0.0178 158.64)",
+          "oklch(72% 0.0178 158.64)",
+          "oklch(84% 0.0178 158.64)",
+          "oklch(95% 0.0178 158.64)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Soft White Ink",
+        "tonalRamp": [
+          "oklch(15% 0.0098 125.68)",
+          "oklch(26% 0.0098 125.68)",
+          "oklch(38% 0.0098 125.68)",
+          "oklch(49% 0.0098 125.68)",
+          "oklch(61% 0.0098 125.68)",
+          "oklch(72% 0.0098 125.68)",
+          "oklch(84% 0.0098 125.68)",
+          "oklch(95% 0.0098 125.68)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted Sage",
+        "tonalRamp": [
+          "oklch(15% 0.0183 153.48)",
+          "oklch(26% 0.0183 153.48)",
+          "oklch(38% 0.0183 153.48)",
+          "oklch(49% 0.0183 153.48)",
+          "oklch(61% 0.0183 153.48)",
+          "oklch(72% 0.0183 153.48)",
+          "oklch(84% 0.0183 153.48)",
+          "oklch(95% 0.0183 153.48)"
+        ]
+      },
+      "pine": {
+        "role": "primary",
+        "displayName": "Pale Mint",
+        "tonalRamp": [
+          "oklch(15% 0.0563 155.49)",
+          "oklch(26% 0.0563 155.49)",
+          "oklch(38% 0.0563 155.49)",
+          "oklch(49% 0.0563 155.49)",
+          "oklch(61% 0.0563 155.49)",
+          "oklch(72% 0.0563 155.49)",
+          "oklch(84% 0.0563 155.49)",
+          "oklch(95% 0.0563 155.49)"
+        ]
+      },
+      "pine-hover": {
+        "role": "primary",
+        "displayName": "Light Mint",
+        "tonalRamp": [
+          "oklch(15% 0.0426 154.93)",
+          "oklch(26% 0.0426 154.93)",
+          "oklch(38% 0.0426 154.93)",
+          "oklch(49% 0.0426 154.93)",
+          "oklch(61% 0.0426 154.93)",
+          "oklch(72% 0.0426 154.93)",
+          "oklch(84% 0.0426 154.93)",
+          "oklch(95% 0.0426 154.93)"
+        ]
+      },
+      "white": {
+        "role": "neutral",
+        "displayName": "Figure White",
+        "tonalRamp": [
+          "oklch(15% 0.0000 0.00)",
+          "oklch(26% 0.0000 0.00)",
+          "oklch(38% 0.0000 0.00)",
+          "oklch(49% 0.0000 0.00)",
+          "oklch(61% 0.0000 0.00)",
+          "oklch(72% 0.0000 0.00)",
+          "oklch(84% 0.0000 0.00)",
+          "oklch(95% 0.0000 0.00)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Large editorial headings; individual surfaces adapt the fluid scale."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Major page sections."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Subsections in prose."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Readable explanations and article text; reduces to 1rem on narrow screens."
+      },
+      "lead": {
+        "displayName": "Lead",
+        "purpose": "Project summaries and introductory copy."
+      },
+      "caption": {
+        "displayName": "Caption",
+        "purpose": "Saved-output context and observations."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Saved-view choices."
+      },
+      "control": {
+        "displayName": "Control",
+        "purpose": "Primary project action."
+      },
+      "step-title": {
+        "displayName": "Workflow Title",
+        "purpose": "A compact title for each stage in the project's short workflow."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "duration-feedback",
+        "value": "160ms",
+        "purpose": "Primary action background feedback only; evidence images switch immediately."
+      },
+      {
+        "name": "ease-feedback",
+        "value": "cubic-bezier(0.23, 1, 0.32, 1)",
+        "purpose": "Responsive control feedback."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "none",
+        "purpose": "The reduced-motion media query removes animation and transitions."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "small-phone-headings",
+        "value": "440px"
+      },
+      {
+        "name": "compact-text-controls",
+        "value": "640px"
+      },
+      {
+        "name": "mobile-navigation-gallery",
+        "value": "720px"
+      },
+      {
+        "name": "stacked-case-study",
+        "value": "750px"
+      },
+      {
+        "name": "stacked-project-preview",
+        "value": "850px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Project Action",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Pale mint action with dark text, subtle background feedback, and visible focus.",
+      "html": "<a class=\"ds-button\" href=\"/projects/automatic-object-discovery/\">Explore the project <svg aria-hidden=\"true\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><path d=\"M5 12h14M12 5l7 7-7 7\"/></svg></a>",
+      "css": ".ds-button { display: inline-flex; align-items: center; justify-content: center; gap: 1rem; min-height: 48px; padding: 0.8rem 1.4rem; background: var(--color-pine); color: var(--color-paper); border-radius: var(--radius-control); text-decoration: none; font-family: var(--font-body); font-size: 1rem; font-weight: 550; line-height: 1.65; transition: background var(--duration-feedback) var(--ease-feedback); } .ds-button:hover { background: var(--color-pine-hover); color: var(--color-paper); } .ds-button:active { background: var(--color-ink); } .ds-button:focus-visible { outline: 3px solid var(--color-pine); outline-offset: 5px; } .ds-button svg { width: 20px; height: 20px; } @media (prefers-reduced-motion: reduce) { .ds-button { transition: none; } }"
+    },
+    {
+      "name": "Text Link",
+      "kind": "button",
+      "refersTo": "text-link",
+      "description": "A quieter link with an arrow and comfortable target height.",
+      "html": "<a class=\"ds-text-link\" href=\"/projects/\">See the work <svg aria-hidden=\"true\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><path d=\"M5 12h14M12 5l7 7-7 7\"/></svg></a>",
+      "css": ".ds-text-link { display: inline-flex; align-items: center; gap: 0.75rem; min-height: 44px; color: var(--color-ink); font-family: var(--font-body); font-size: var(--text-body); font-weight: 550; line-height: 1.65; text-decoration-thickness: 1px; text-underline-offset: 0.24em; } .ds-text-link:hover { color: var(--color-pine); } .ds-text-link:focus-visible { outline: 3px solid var(--color-pine); outline-offset: 5px; } .ds-text-link svg { width: 18px; height: 18px; flex-shrink: 0; }"
+    },
+    {
+      "name": "Site Navigation",
+      "kind": "nav",
+      "refersTo": "site-navigation",
+      "description": "Real Home, Projects, and About page links with a visible active destination. Projects remains active on case studies. Direct loading, refresh, and browser Back/Forward retain the correct route and navigation. GitHub remains separate.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Main navigation\"><a href=\"/\" aria-current=\"page\">Home</a><a href=\"/projects/\">Projects</a><a href=\"/about/\">About</a></nav>",
+      "css": ".ds-nav { display: flex; gap: 0.35rem; padding: 0.3rem; width: fit-content; background: var(--color-surface); border-radius: var(--radius-control); font-family: var(--font-body); } .ds-nav a { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0.5rem 1.4rem; color: var(--color-ink); font-size: 0.95rem; line-height: 1.65; text-decoration: none; border-radius: var(--radius-control); } .ds-nav a[aria-current=\"page\"] { background: var(--color-pine); color: var(--color-paper); font-weight: 550; } .ds-nav a:hover:not([aria-current]) { color: var(--color-pine); } .ds-nav a:focus-visible { outline: 3px solid var(--color-pine); outline-offset: 5px; } @media (max-width: 720px) { .ds-nav { width: 100%; } .ds-nav a { flex: 1; min-width: 0; padding-inline: 0.75rem; } }"
+    },
+    {
+      "name": "Saved Image View",
+      "kind": "input",
+      "refersTo": "saved-view-group",
+      "description": "Native radios choose an intact saved figure. This preview shows the controls; the website progressively enhances the figures.",
+      "html": "<fieldset class=\"ds-views\"><legend class=\"ds-visually-hidden\">Saved image view</legend><label><input type=\"radio\" name=\"ds-saved-view\" value=\"input\"/><span>Input</span></label><label><input type=\"radio\" name=\"ds-saved-view\" value=\"mask\" checked/><span>Mask overlay</span></label><label><input type=\"radio\" name=\"ds-saved-view\" value=\"annotated\"/><span>Annotated</span></label></fieldset>",
+      "css": ".ds-views { display: flex; flex-wrap: wrap; gap: 0.25rem; width: fit-content; border: 0; padding: 0.25rem; margin: 0; background: var(--color-surface); color: var(--color-ink); border-radius: var(--radius-control); font-family: var(--font-body); line-height: 1.65; } .ds-visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; } .ds-views label { position: relative; cursor: pointer; } .ds-views input { position: absolute; inset: 0; opacity: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; } .ds-views span { display: flex; align-items: center; justify-content: center; min-height: 44px; padding: 0.5rem 0.95rem; border-radius: var(--radius-control); font-size: var(--text-small); font-weight: 500; } .ds-views input:checked + span { color: var(--color-paper); background: var(--color-pine); } .ds-views input:focus-visible + span { outline: 3px solid var(--color-pine); outline-offset: 3px; } @media (hover: hover) and (pointer: fine) { .ds-views input:not(:checked):hover + span { color: var(--color-pine); background: var(--color-paper); } } @media (max-width: 640px) { .ds-views span { padding-inline: 0.8rem; } }"
+    },
+    {
+      "name": "Workflow Steps",
+      "kind": "custom",
+      "refersTo": "workflow-step-title",
+      "description": "Short stages share the same content on Projects and the case study; Home keeps a compact project preview.",
+      "html": "<ol class=\"ds-workflow\" aria-label=\"How the approach works\"><li><h3>Discover objects</h3><p>Qwen2.5-VL suggests what is in the image.</p></li><li><h3>Locate them</h3><p>Grounding DINO finds the suggested objects.</p></li><li><h3>Create masks</h3><p>SAM 2.1 turns detected boxes into pixel masks.</p></li></ol>",
+      "css": ".ds-workflow { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); gap: 2rem 3rem; list-style: none; padding: 0; margin: 0; font-family: var(--font-body); } .ds-workflow h3 { margin: 0; color: var(--color-ink); font-size: 1.125rem; letter-spacing: -0.015em; font-weight: 550; line-height: 1.25; } .ds-workflow p { margin: 0.65rem 0 0; max-width: 32ch; color: var(--color-muted); font-size: 1rem; line-height: 1.65; } @media (max-width: 640px) { .ds-workflow { gap: 1.5rem; } }"
+    },
+    {
+      "name": "Local Draft Label",
+      "kind": "chip",
+      "refersTo": "draft-label",
+      "description": "A non-interactive status label for local draft previews.",
+      "html": "<span class=\"ds-draft\">Draft · local preview</span>",
+      "css": ".ds-draft { display: inline-block; background: var(--color-surface); color: var(--color-ink); padding: 0.3rem 0.75rem; font-family: var(--font-body); font-size: var(--text-small); line-height: 1.65; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Research Journal",
+    "overview": "The dark research journal pairs calm editorial typography with real experimental imagery. Visitors should understand the purpose and visible result quickly, then choose how deeply to read. The interface frames the work with spacious composition, short explanations, and direct navigation.\n\nEach page is a normal scrolling document. It uses static reading, native controls, and modest state feedback. The colorful saved outputs provide visual variety; the surrounding interface stays quiet. Its identity comes from the relationship between serif headlines, practical sans-serif text, and unaltered evidence.",
+    "keyCharacteristics": [
+      "Image-led explanation with a short workflow before detailed prose.",
+      "Charcoal surfaces, soft white text, and a restrained mint accent.",
+      "Serif headings and readable sans-serif body text.",
+      "Full saved figures, honest captions, and visible limitations.",
+      "Flat surfaces, normal scrolling, and familiar controls."
+    ],
+    "rules": [
+      {
+        "name": "The Evidence Color Rule",
+        "body": "Interface colors frame the results; they do not recolor or cosmetically improve the saved images.",
+        "section": "colors"
+      },
+      {
+        "name": "The Saved Evidence Rule",
+        "body": "Compare intact corresponding outputs. Different canvas margins do not justify a pixel-aligned wipe, a fabricated intermediate frame, or a cosmetic correction.",
+        "section": "components"
+      },
+      {
+        "name": "The Page Navigation Rule",
+        "body": "Every page has a real URL that loads directly and survives a refresh. Browser Back and Forward must restore the correct page and active navigation, with Projects active on case studies.",
+        "section": "components"
+      }
+    ],
+    "dos": [
+      "Do lead with actual project imagery and a concise explanation.",
+      "Do reuse the shared tokens, layouts, and content-driven components.",
+      "Do preserve complete evidence images, captions, and visible limitations.",
+      "Do keep normal scrolling, text selection, zoom, and keyboard focus.",
+      "Do make essential content readable without JavaScript or interaction.",
+      "Do let long titles, links, and controls reflow on narrow screens."
+    ],
+    "donts": [
+      "Don't invent metrics, testimonials, projects, or decorative status signals.",
+      "Don't crop away errors, recolor masks, or fabricate model outputs.",
+      "Don't add motion to the evidence, simulated inference, or scroll reveals.",
+      "Don't add glass, gradients, shadows, artificial numbering, or decorative rules.",
+      "Don't use monospace as decoration outside code examples.",
+      "Don't create empty cards, headings, or buttons for missing optional content."
+    ]
+  }
+}

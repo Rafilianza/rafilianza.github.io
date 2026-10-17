@@ -1,0 +1,12 @@
+---
+import type { CollectionEntry } from 'astro:content';
+interface Props { links: CollectionEntry<'projects'>['data']['links']; }
+const { links } = Astro.props;
+const destinations = [
+  { label: 'View repository', url: links?.repository },
+  { label: 'Read the notebook', url: links?.notebook },
+  { label: 'Try the demo', url: links?.demo },
+  { label: 'Read the publication', url: links?.publication },
+].filter((link) => link.url);
+---
+{destinations.length > 0 && <div class="project-links">{destinations.map((link) => <a class="text-link" href={link.url}>{link.label}</a>)}</div>}

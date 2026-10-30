@@ -8,6 +8,7 @@ import ProjectLinks from '../components/ProjectLinks.astro';
 import ProjectGallery from '../components/ProjectGallery.astro';
 import WorkflowSteps from '../components/WorkflowSteps.astro';
 import ArrowIcon from '../components/ArrowIcon.astro';
+import TopicLabel from '../components/TopicLabel.astro';
 
 interface Props { project: CollectionEntry<'projects'>; headings: MarkdownHeading[]; }
 const { project, headings } = Astro.props;
@@ -66,7 +67,7 @@ const hasLinks = data.links && Object.values(data.links).some(Boolean);
         </nav>}
         {data.technologies.length > 0 && <div class="technology-list">
           <h2 class="eyebrow">Built with</h2>
-          <ul>{data.technologies.map((technology) => <li>{technology}</li>)}</ul>
+          <ul>{data.technologies.map((technology) => <li><TopicLabel label={technology} /></li>)}</ul>
         </div>}
       </aside>}
       <div class="prose"><slot /></div>
@@ -109,8 +110,8 @@ const hasLinks = data.links && Object.values(data.links).some(Boolean);
   .case-sections a:hover { color: var(--color-accent); }
   .technology-list { margin-top: var(--space-4); }
   .technology-list:first-child { margin-top: 0; }
-  .technology-list li { color: var(--color-muted); font-size: 0.8125rem; line-height: 1.7; }
-  .technology-list li + li { margin-top: 0.5rem; }
+  .technology-list ul { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .technology-list li { min-width: 0; max-width: 100%; }
   .prose { max-width: var(--reading-width); }
   .case-close { display: flex; align-items: end; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap; border-top: 1px solid var(--color-rule); padding-top: var(--space-5); margin-top: var(--space-7); }
   .case-close h2 { font-size: clamp(2.5rem, 4vw, 3.5rem); margin-block: 1rem 0.5rem; }
@@ -132,8 +133,6 @@ const hasLinks = data.links && Object.values(data.links).some(Boolean);
     .case-sidebar { position: static; }
     .case-sections ul { display: flex; flex-wrap: wrap; gap: 0 1.25rem; margin-top: 0.5rem; }
     .technology-list { margin-top: 1.25rem; }
-    .technology-list ul { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; }
-    .technology-list li + li { margin-top: 0; }
     .case-close { margin-top: var(--space-6); }
   }
 </style>

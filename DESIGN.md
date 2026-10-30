@@ -10,6 +10,11 @@ colors:
   accent-hover: "#ffb17d"
   rule: "#30302e"
   white: "#ffffff"
+  topic-vision: "#8ec8ff"
+  topic-generative: "#c4adff"
+  topic-research: "#f1a6c9"
+  topic-analytics: "#8cdbb5"
+  topic-data: "#e7c66e"
 typography:
   display:
     fontFamily: "'Newsreader Variable', Georgia, serif"
@@ -51,7 +56,8 @@ families are served locally through the existing Fontsource dependencies.
 Open layouts, strong changes in type scale, thin rules, and generous imagery
 create the hierarchy. Use surfaces only where they clarify a group or control.
 Avoid defaulting every section to a filled card, decorative gradients, glass,
-arbitrary multicolour badges, or motion that delays reading.
+arbitrary colour assignments, or motion that delays reading. Topic labels use
+the fixed semantic mapping below, consistently across every page.
 
 The user will update project content later. This design work preserves the
 existing project Markdown, original figures, source links, and factual limits.
@@ -71,6 +77,30 @@ Existing tool configuration is separate from the site's source of truth.
 - `accent` identifies actions, active controls, focus, and selective emphasis.
 - `accent-hover` supplies brief control feedback; `rule` separates sections.
 - `white` preserves the original exported backgrounds of saved figures.
+
+### Topic labels
+
+Use the shared `TopicLabel.astro` for compact noninteractive labels. The same
+label must receive the same colour wherever it appears; never cycle colours
+by position, page, or list order. Preserve the black/off-white foundation and
+orange actions while using the following topic mapping:
+
+| Topic family | Text colour |
+| --- | --- |
+| Vision and machine learning | Soft blue `#8ec8ff` |
+| Diffusion and generative models | Lavender `#c4adff` |
+| Research | Rose `#f1a6c9` |
+| Experiments and analytics | Mint `#8cdbb5` |
+| Data and tools | Gold `#e7c66e` |
+| Unknown labels | Neutral grey |
+
+Apply this treatment to Home's focus and experience/education topics, About's
+interests, project and case-study technology labels, and CV skills. Use tinted
+backgrounds and borders, readable text, and natural wrapping. These labels are
+descriptive text, not buttons, filters, or navigation. Colour supplements the
+words and does not imply a proficiency rating or an employment status.
+
+### Responsive composition
 
 All routes share a maximum content width of 1120px with fluid side gutters.
 Reading text stays within a comfortable measure, usually at most 65ch. Large
@@ -93,11 +123,17 @@ subject alongside the existing biography from `homeIntroduction`. The next
 section presents the first sorted project as a static visual preview. Keep
 its purpose, intact image, supported finding, and case-study link together.
 
-My Journey follows the work and contains at most three selected CV entries,
-ordered by `journeyOrder`. Titles, organisations, dates, existing short
-summaries, and optional verified topics provide context. Detailed duties and
-bullet points remain on the full CV. An About introduction offers a route to
-more personal context, followed by the shared contact footer.
+Work Experience follows the featured project and shows every entry in the
+profile's `experience` section. Education follows it and shows every entry in
+`education`. Preserve the source order within each section; the current profile
+contains four work entries and two education entries. `JourneySummary.astro`
+supplies both sections through the shared `CvEntries.astro` component.
+
+Titles, organisations, dates, existing short summaries, and optional verified
+`journeyTopics` provide compact context. Detailed duties and bullet points
+remain on the full CV. `journeyOrder` is accepted for compatibility and no
+longer controls homepage inclusion or sorting. An About introduction offers a
+route to more personal context, followed by the shared contact footer.
 
 ### Projects
 
@@ -185,7 +221,7 @@ contributions. The first project's code authorship remains unconfirmed.
 ## Maintenance and verification
 
 - Keep one Markdown source per project and a shared profile for biography,
-  contact, My Journey, and the full CV.
+  contact, Work Experience, Education, and the full CV.
 - Replace the separate PDF deliberately when CV content changes; editing the
   profile does not regenerate it.
 - Preserve expected December 2026 graduation, overlapping employment dates,

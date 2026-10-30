@@ -2,6 +2,7 @@
 import type { CollectionEntry } from 'astro:content';
 import { Image } from 'astro:assets';
 import ArrowIcon from './ArrowIcon.astro';
+import TopicLabel from './TopicLabel.astro';
 
 interface Props {
   project: CollectionEntry<'projects'>;
@@ -20,7 +21,7 @@ const previewWidths = previewImage
 <article class:list={['project-preview', variant, { 'without-image': !previewImage }]}>
   <div class="project-intro">
     {data.draft && <p class="draft-label">Draft · local preview</p>}
-    {data.tags.length > 0 && <p class="project-category">{data.tags[0]}</p>}
+    {data.tags.length > 0 && <p class="project-category"><TopicLabel label={data.tags[0]} /></p>}
     <Heading class="project-title"><a href={projectUrl}>{data.title}</a></Heading>
     <p class="project-summary">{data.summary}</p>
   </div>
@@ -39,14 +40,14 @@ const previewWidths = previewImage
   <div class="project-details">
     {variant === 'listing' && data.role && <p class="contribution"><strong>My contribution</strong> {data.role}</p>}
     {data.finding && <p class="finding"><strong>From the experiment</strong> {data.finding}</p>}
-    {variant === 'listing' && data.technologies.length > 0 && <p class="technologies">{data.technologies.join(' · ')}</p>}
+    {variant === 'listing' && data.technologies.length > 0 && <ul class="technologies" aria-label="Technologies">{data.technologies.map((technology) => <li><TopicLabel label={technology} /></li>)}</ul>}
     <a class="text-link case-study-link" href={projectUrl}>Explore the case study <ArrowIcon /></a>
   </div>
 </article>
 <style>
   .project-preview { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); grid-template-areas: 'visual intro' 'visual details'; column-gap: clamp(2rem, 5vw, 4rem); row-gap: 1.5rem; }
   .project-intro { grid-area: intro; align-self: end; }
-  .project-category { margin-bottom: 1.25rem; color: var(--color-accent); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; line-height: 1.5; }
+  .project-category { display: flex; margin-bottom: 1.25rem; min-width: 0; }
   .project-title { font-size: clamp(2rem, 3.7vw, 3.25rem); line-height: 1.08; text-wrap: initial; }
   .project-title a { text-decoration: none; }
   .project-summary { margin-top: 1.25rem; color: var(--color-muted); font-size: 0.9375rem; line-height: 1.75; max-width: 40ch; }
@@ -58,7 +59,8 @@ const previewWidths = previewImage
   .finding, .contribution { font-size: 0.8125rem; line-height: 1.7; color: var(--color-muted); max-width: 44ch; }
   .finding strong, .contribution strong { display: block; margin-bottom: 0.35rem; color: var(--color-ink); font-weight: 500; }
   .contribution + .finding { margin-top: var(--space-2); }
-  .technologies { margin-top: var(--space-2); color: var(--color-muted); font-size: 0.75rem; line-height: 1.8; }
+  .technologies { display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none; margin: var(--space-2) 0 0; padding: 0; }
+  .technologies li { min-width: 0; max-width: 100%; }
   .case-study-link { margin-top: 1.25rem; color: var(--color-accent); }
   .draft-label { margin-bottom: 1rem; }
   .listing { padding-block: var(--space-5); border-top: 1px solid var(--color-rule); }

@@ -5,8 +5,8 @@ The first case study is **Automatic Object Discovery and Segmentation**.
 
 The website uses Astro to turn project Markdown files into an editorial homepage,
 a Projects listing, and individual case-study pages. A shared CV entry supplies
-Home's My Journey summary, the About biography, and a full CV page. Static
-means the published site serves ordinary
+Home's Work Experience and Education sections, the About biography, and a full
+CV page. Static means the published site serves ordinary
 HTML, CSS, images, and a small amount of JavaScript; it does not need a running
 application server or a model backend.
 
@@ -57,7 +57,7 @@ src/
   layouts/                       Shared page and case-study layouts
   lib/projects.ts                Shared project visibility and ordering
   pages/
-    index.astro                  Home: introduction, project preview, journey, About
+    index.astro                  Home: introduction, project, experience, education, About
     about.astro                  About: background, interests, and mentoring
     about/cv.astro                Full CV with section links and PDF download
     projects/
@@ -293,11 +293,12 @@ article. It is **not currently required**. To adopt it later, add the official
 loader, and convert only entries that need it. Ordinary projects can remain
 Markdown.
 
-## Update the CV and My Journey
+## Update the CV, Work Experience, and Education
 
 Edit `src/content/profile/cv.md` to update the website's biography, CV, and
-My Journey summary together. Its YAML frontmatter contains `name`, `summary`,
-optional `homeIntroduction`, `location`, `email`, `linkedin`, `pdf`, `sections`,
+Home's Work Experience and Education sections together. Its YAML frontmatter
+contains `name`, `summary`, optional `homeIntroduction`, `location`, `email`,
+`linkedin`, `pdf`, `sections`,
 and `skills`. About uses the shared summary and links to the full CV and LinkedIn.
 The shared footer also reads available contact links from this entry.
 Use `homeIntroduction` for the brief homepage biography. If omitted, Home falls
@@ -315,15 +316,19 @@ section. Contact fields and `pdf` are optional. When present, email and LinkedIn
 must be valid addresses, and `pdf` must start with `/` and end with `.pdf`.
 Dates remain plain text so expected dates and the source CV's precision survive.
 
-Add `journeyOrder` to entries that should appear in Home's My Journey section.
-`journeyOrder` must be a nonnegative whole number. `JourneySummary.astro` selects
-at most three entries in ascending order and uses `CvEntries.astro` to show
-their titles, available organisations, dates, short summaries, and optional `journeyTopics` after
-the featured project. `journeyTopics` is a list of short, verified capability
+Home shows two separate sections after the featured project: **Work Experience**
+from the profile section with `id: experience`, then **Education** from the
+section with `id: education`. `JourneySummary.astro` includes every entry from
+those sections and preserves their source order. The current profile has four
+work entries and two education entries. Add or reorder entries in the matching
+profile section to update Home and the full CV together.
+
+`CvEntries.astro` shows titles, available organisations, dates, short summaries,
+and optional `journeyTopics` in the compact Home view. Detailed responsibilities
+remain on the full CV. `journeyTopics` is a list of short, verified capability
 labels; keep it to two or three useful phrases. For example:
 
 ```yaml
-journeyOrder: 1
 journeyTopics:
   - "A/B testing"
   - "Data pipelines"
@@ -331,11 +336,16 @@ journeyTopics:
 ```
 
 Omitting `journeyTopics` defaults to an empty list, with no label group rendered.
-The labels appear only in Home's summary, not in the full CV's detailed entries.
-Omit `journeyOrder` to keep an entry only in the full CV. The **View full CV** link
-opens `/about/cv/`, where education, research, experience, leadership, and skills
-remain readable without JavaScript. The full CV reuses `CvEntries.astro` in its
-detailed mode to include locations, summaries, and bullet points.
+These entry topics appear in Home's compact sections; the full CV also has
+separate skill groups. The optional `journeyOrder` field remains accepted as a
+nonnegative whole number for compatibility, but it no longer controls Home
+inclusion or sorting. Removing it does not hide an experience or education
+entry from Home.
+
+The **View full CV** link opens `/about/cv/`, where education, research,
+experience, leadership, and skills remain readable without JavaScript. The
+full CV reuses `CvEntries.astro` in its detailed mode to include locations,
+summaries, and bullet points.
 
 Keep the Master's completion date marked **expected December 2026** until it is
 confirmed. Preserve the source CV's overlapping employment dates and omit dates
@@ -347,8 +357,8 @@ editing `cv.md` does not regenerate it. When the CV changes, update the web entr
 and replace the PDF separately so both versions stay consistent. The `pdf` field
 uses its public URL, `/cv/muhammad-dhiaz-rafilianza.pdf`, never a private local path.
 
-Check My Journey, About, the full CV's section links, and the PDF download after
-editing. Open and refresh `/about/cv/` directly, then use Back and Forward to
+Check Work Experience, Education, About, the full CV's section links, and the
+PDF download after editing. Open and refresh `/about/cv/` directly, then use Back and Forward to
 confirm that About remains the active navigation item.
 
 ## Change the shared design
@@ -371,8 +381,16 @@ provide hierarchy. There is no separate Home-only palette.
 Shared accent tokens are `--color-accent` and `--color-accent-hover`;
 `--color-rule` supplies quiet dividers. Keep the purpose and visual result
 together, allow headings to wrap, and let complete figures and longer
-explanations scroll naturally. My Journey may display each selected entry's
-existing short summary; full responsibilities remain on the CV.
+explanations scroll naturally. Home's Work Experience and Education sections
+display existing short summaries; full responsibilities remain on the CV.
+
+Use `TopicLabel.astro` for topic and technology labels. Its shared mapping uses
+soft blue (`#8ec8ff`) for vision/ML, lavender (`#c4adff`) for diffusion/generative
+topics, rose (`#f1a6c9`) for research, mint (`#8cdbb5`) for experiments/analytics,
+and gold (`#e7c66e`) for data/tools. Unknown labels use neutral grey. The same
+label keeps the same colour across Home, About interests, Projects and case-study
+technologies, and CV skills. Labels wrap naturally, with tinted backgrounds and
+borders; they are descriptive text rather than interactive controls.
 
 Keep text contrast, visible keyboard focus, and reduced-motion behavior when
 changing colors or interactions. Evidence views must remain usable by touch and

@@ -25,13 +25,16 @@ the agreed design take priority over generic skill recommendations.
   Case studies retain their own `/projects/<slug>/` routes. Preserve active
   navigation, with Projects highlighted on case studies and About on `/about/cv/`.
 - Keep `src/content/profile/cv.md` as the shared source for About's biography,
-  the full CV, and My Journey. Home shows at most three entries with
-  `journeyOrder`, sorted ascending, after the featured project. Show title,
-  available organisation, dates, a brief existing summary, and optional verified `journeyTopics` there,
-  with a View full CV link. Keep the optional `homeIntroduction` in this same
-  profile entry. Reuse
-  `CvEntries.astro` for Home and the detailed CV; keep detailed responsibilities
-  and bullet points on the full CV.
+  the full CV, and Home's Work Experience and Education sections. After the
+  featured project, show every entry from the `experience` section, then every
+  entry from `education`, preserving their source order. These currently contain
+  four work entries and two education entries. Show titles, available
+  organisations, dates, existing short summaries, and optional verified
+  `journeyTopics`, with a View full CV link. `journeyOrder` remains accepted for
+  compatibility but no longer controls Home inclusion or order. Keep the optional
+  `homeIntroduction` in this same profile entry. Reuse `CvEntries.astro` for
+  Home and the detailed CV; keep detailed responsibilities and bullet points on
+  the full CV.
 - Keep the full CV readable as HTML with section navigation and a download of
   `public/cv/muhammad-dhiaz-rafilianza.pdf`. The PDF is the unchanged original;
   replacing it is separate from editing the web entry. Keep both versions aligned.
@@ -50,6 +53,12 @@ the agreed design take priority over generic skill recommendations.
   body type, open compositions, and prominent intact project imagery. Keep real
   page navigation and clear active states. The former Home-only palette split
   is superseded by this direction.
+- Use the shared `TopicLabel.astro` for noninteractive topic and technology
+  labels across Home, About interests, Projects, case studies, and CV skills.
+  Keep semantic colours stable: vision/ML soft blue, diffusion/generative
+  lavender, research rose, experiments/analytics mint, and data/tools gold.
+  Unknown labels use the neutral treatment. Use wrapping labels with tinted
+  backgrounds and borders; do not assign colours by row position.
 - The user will update project content later. Preserve existing project copy,
   evidence, and source links during the design overhaul; do not add speculative
   case studies, project claims, placeholder projects, or a fabricated portrait.

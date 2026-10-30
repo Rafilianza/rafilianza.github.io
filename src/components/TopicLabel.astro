@@ -1,0 +1,79 @@
+---
+interface Props {
+  label: string;
+}
+
+const { label } = Astro.props;
+type Topic = 'vision' | 'generative' | 'research' | 'analytics' | 'data';
+
+// Match known terms consistently across pages. New terms stay neutral until classified.
+const topics: Record<string, Topic> = {
+  'computer vision': 'vision',
+  'machine learning': 'vision',
+  'deep learning': 'vision',
+  'vision transformers': 'vision',
+  'vision-language models': 'vision',
+  'image classification': 'vision',
+  'image segmentation': 'vision',
+  'model fine-tuning': 'vision',
+  'reinforcement learning': 'vision',
+  'pytorch': 'vision',
+  'tensorflow': 'vision',
+  'hugging face transformers': 'vision',
+  'qwen2.5-vl': 'vision',
+  'grounding dino': 'vision',
+  'sam 2.1': 'vision',
+  'video diffusion': 'generative',
+  'video diffusion models': 'generative',
+  'diffusion models': 'generative',
+  'generative ai': 'generative',
+  'research': 'research',
+  'model evaluation': 'research',
+  'classification benchmarking': 'research',
+  'adversarial robustness testing': 'research',
+  'a/b testing': 'analytics',
+  'analytics': 'analytics',
+  'experimentation': 'analytics',
+  'growth analytics': 'analytics',
+  'customer analytics': 'analytics',
+  'business metrics': 'analytics',
+  'data storytelling': 'analytics',
+  'tableau': 'analytics',
+  'data pipelines': 'data',
+  'bigquery': 'data',
+  'google bigquery': 'data',
+  'airflow': 'data',
+  'etl workflows': 'data',
+  'python': 'data',
+  'sql': 'data',
+  'numpy': 'data',
+  'pandas': 'data',
+};
+const topic = topics[label.trim().toLowerCase()] ?? 'neutral';
+---
+<span class="topic-label" data-topic={topic}>{label}</span>
+
+<style>
+  .topic-label {
+    display: inline-block;
+    max-width: 100%;
+    padding: 0.25rem 0.625rem;
+    border: 1px solid color-mix(in srgb, currentColor 25%, transparent);
+    border-radius: var(--radius-control);
+    background: color-mix(in srgb, currentColor 8%, transparent);
+    color: var(--color-muted);
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 450;
+    line-height: 1.5;
+    letter-spacing: normal;
+    text-transform: none;
+    overflow-wrap: anywhere;
+    vertical-align: middle;
+  }
+  .topic-label[data-topic='vision'] { color: var(--color-topic-vision); }
+  .topic-label[data-topic='generative'] { color: var(--color-topic-generative); }
+  .topic-label[data-topic='research'] { color: var(--color-topic-research); }
+  .topic-label[data-topic='analytics'] { color: var(--color-topic-analytics); }
+  .topic-label[data-topic='data'] { color: var(--color-topic-data); }
+</style>

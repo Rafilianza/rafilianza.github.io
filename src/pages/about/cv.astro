@@ -3,6 +3,7 @@ import { getEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import CvEntries from '../../components/CvEntries.astro';
 import ArrowIcon from '../../components/ArrowIcon.astro';
+import TopicLabel from '../../components/TopicLabel.astro';
 
 const entry = await getEntry('profile', 'cv');
 if (!entry) throw new Error('Add the CV content at src/content/profile/cv.md.');
@@ -47,7 +48,10 @@ const cv = entry.data;
             <h2 id="technical-skills">Technical skills</h2>
             <dl class="skills">
               {cv.skills.map((group) => (
-                <div><dt>{group.title}</dt><dd>{group.items.join(', ')}</dd></div>
+                <div>
+                  <dt>{group.title}</dt>
+                  <dd><ul class="skill-labels">{group.items.map((item) => <li><TopicLabel label={item} /></li>)}</ul></dd>
+                </div>
               ))}
             </dl>
           </section>
@@ -87,6 +91,8 @@ const cv = entry.data;
   .skills > div:first-child { padding-top: 0; border-top: 0; }
   .skills dt { font-size: 0.9375rem; font-weight: 500; }
   .skills dd { margin: 0; color: var(--color-muted); font-size: 0.9375rem; }
+  .skill-labels { display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none; margin: 0; padding: 0; }
+  .skill-labels li { display: flex; min-width: 0; }
   .cv-return { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem 1.5rem; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--color-rule); font-size: 0.8125rem; }
   @media (max-width: 900px) {
     .cv-intro { gap: 2rem 3rem; }

@@ -7,6 +7,11 @@
   --color-accent-hover: #ffb17d;
   --color-rule: #30302e;
   --color-white: #ffffff;
+  --color-topic-vision: #8ec8ff;
+  --color-topic-generative: #c4adff;
+  --color-topic-research: #f1a6c9;
+  --color-topic-analytics: #8cdbb5;
+  --color-topic-data: #e7c66e;
   --font-display: 'Newsreader Variable', Georgia, serif;
   --font-body: 'Archivo Variable', Arial, sans-serif;
   --text-small: 0.875rem;

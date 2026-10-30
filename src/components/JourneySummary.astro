@@ -1,0 +1,36 @@
+---
+import { getEntry } from 'astro:content';
+import ArrowIcon from './ArrowIcon.astro';
+import CvEntries from './CvEntries.astro';
+
+const cv = await getEntry('profile', 'cv');
+const highlights = cv?.data.sections
+  .flatMap((section) => section.entries)
+  .filter((entry) => entry.journeyOrder !== undefined)
+  .sort((first, second) => (first.journeyOrder ?? 0) - (second.journeyOrder ?? 0))
+  .slice(0, 3) ?? [];
+---
+{highlights.length > 0 && (
+  <section class="journey container" aria-labelledby="journey-heading">
+    <div class="journey-heading">
+      <div>
+        <p class="eyebrow"><span class="section-number" aria-hidden="true">02</span> My journey</p>
+        <h2 id="journey-heading">From data to <em>visual AI.</em></h2>
+      </div>
+      <a class="text-link" href="/about/cv/">View full CV <ArrowIcon /></a>
+    </div>
+    <CvEntries entries={highlights} />
+  </section>
+)}
+<style>
+  .journey { padding-block: clamp(4rem, 8vw, 7rem) 1rem; }
+  .journey-heading { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem 2rem; margin-bottom: 2.5rem; }
+  .journey-heading h2 { margin-top: 1rem; font-size: clamp(2.25rem, 4vw, 3.5rem); line-height: 1.1; font-weight: 400; }
+  h2 em { color: var(--color-accent); font-weight: 400; }
+  .journey-heading a { color: var(--color-ink); font-size: 0.875rem; }
+  .journey-heading a:hover { color: var(--color-accent); }
+  @media (max-width: 640px) {
+    .journey-heading { margin-bottom: 1.5rem; }
+    .journey-heading h2 { margin-top: 0.75rem; }
+  }
+</style>

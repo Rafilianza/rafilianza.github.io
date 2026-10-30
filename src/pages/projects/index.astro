@@ -1,22 +1,30 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ProjectPreview from '../../components/ProjectPreview.astro';
-import WorkflowSteps from '../../components/WorkflowSteps.astro';
 import { getProjects } from '../../lib/projects';
 const projects = await getProjects();
 ---
-<BaseLayout title="Projects | Dhiaz Rafilianza" description="Visual experiments in deep learning and computer vision. Explore real results, the approach behind them, and the code.">
-  <div class="container projects-page">
-    <header class="page-intro"><h1>Projects.</h1><p>Practical experiments. Real outputs.<br />A closer look at how they work.</p></header>
-    {projects.map((project, projectIndex) => <section class="project-entry" aria-label={project.data.title}><ProjectPreview project={project} priority={projectIndex === 0} />{project.data.steps.length > 0 && <div class="workflow"><WorkflowSteps steps={project.data.steps} /></div>}</section>)}
-  </div>
+<BaseLayout title="Projects | Dhiaz Rafilianza" description="Experiments in deep learning and computer vision. See each project's purpose and findings, then explore its case study and source.">
+  <section class="container projects-page" aria-labelledby="projects-heading">
+    <header class="projects-intro">
+      <div><p class="eyebrow">Projects & experiments</p><h1 id="projects-heading">Ideas, put<br />into <em>practice.</em></h1></div>
+      <p class="projects-description">Experiments in computer vision, with the results and lessons behind them.</p>
+    </header>
+    <div class="project-list">
+      {projects.map((project, projectIndex) => <ProjectPreview project={project} variant="listing" priority={projectIndex === 0} />)}
+    </div>
+  </section>
 </BaseLayout>
 <style>
-  .projects-page { padding-bottom: var(--space-5); }
-  .page-intro { display: flex; justify-content: space-between; align-items: end; gap: 2rem; padding-block: var(--space-4) var(--space-6); }
-  .page-intro h1 { font-size: clamp(3rem, 6vw, 5.5rem); }
-  .page-intro p { font-size: var(--text-lead); color: var(--color-muted); }
-  .project-entry + .project-entry { margin-top: var(--space-7); }
-  .workflow { margin-top: var(--space-5); background: var(--color-surface); padding: var(--space-4); }
-  @media (max-width: 750px) { .page-intro { display: block; padding-block: 1.5rem 2.5rem; } .page-intro p { margin-top: 1rem; } .workflow { padding: var(--space-3); } }
+  .projects-page { padding-bottom: var(--space-6); }
+  .projects-intro { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); align-items: end; gap: var(--space-5); padding-block: var(--space-6); border-bottom: 1px solid var(--color-rule); margin-bottom: var(--space-5); }
+  .eyebrow { margin-bottom: 1.25rem; }
+  h1 { font-size: clamp(3.5rem, 7vw, 6rem); line-height: 0.98; font-weight: 400; letter-spacing: -0.045em; }
+  h1 em { color: var(--color-accent); font-weight: 400; }
+  .projects-description { max-width: 35ch; color: var(--color-muted); font-size: var(--text-lead); padding-bottom: 0.4rem; }
+  .project-list { display: grid; gap: var(--space-6); }
+  @media (max-width: 760px) {
+    .projects-intro { grid-template-columns: 1fr; gap: 1.5rem; padding-block: var(--space-5); }
+    .projects-description { max-width: 45ch; font-size: 1rem; }
+  }
 </style>

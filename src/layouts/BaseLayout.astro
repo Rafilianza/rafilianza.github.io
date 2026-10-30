@@ -1,6 +1,7 @@
 ---
-import '@fontsource-variable/newsreader';
 import '@fontsource-variable/archivo';
+import '@fontsource-variable/newsreader';
+import '@fontsource-variable/newsreader/wght-italic.css';
 import '../styles/global.css';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
@@ -11,17 +12,19 @@ interface Props {
   image?: string;
   imageAlt?: string;
   draft?: boolean;
+  pageClass?: string;
+  themeColor?: string;
 }
-const { title, description, image = '/social-preview.png', imageAlt = 'Saved notebook result: colored segmentation masks over a truck, its parts, and the surrounding street.', draft = false } = Astro.props;
+const { title, description, image = '/social-preview.png', imageAlt = 'Saved notebook result: colored segmentation masks over a truck, its parts, and the surrounding street.', draft = false, pageClass, themeColor = '#000000' } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const socialImage = new URL(image, Astro.site);
 ---
 <!doctype html>
-<html lang="en">
+<html lang="en" class={pageClass}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#151b18" />
+    <meta name="theme-color" content={themeColor} />
     <title>{title}</title>
     <meta name="description" content={description} />
     {draft && <meta name="robots" content="noindex, nofollow" />}

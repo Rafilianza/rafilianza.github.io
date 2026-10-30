@@ -1,5 +1,6 @@
 ---
 import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
 interface View {
   label: string;
   src: ImageMetadata;
@@ -35,9 +36,20 @@ const selectedView = Math.min(Math.max(initialView, 0), views.length - 1);
     {views.map((view, viewIndex) => (
       <figure id={`${id}-figure-${viewIndex}`}>
         <div class="image-stage">
-          <img src={view.src.src} width={view.src.width} height={view.src.height} alt={view.alt} loading={eager && viewIndex === selectedView ? 'eager' : 'lazy'} fetchpriority={eager && viewIndex === selectedView ? 'high' : 'auto'} decoding="async" />
+          <Image
+            src={view.src}
+            width={Math.min(view.src.width, 1600)}
+            widths={[480, 800, 1200, 1600].filter((width) => width <= view.src.width)}
+            sizes="(max-width: 760px) calc(100vw - 40px), (max-width: 1200px) calc(100vw - 80px), 1120px"
+            format="webp"
+            quality={90}
+            alt={view.alt}
+            loading={eager && viewIndex === selectedView ? 'eager' : 'lazy'}
+            fetchpriority={eager && viewIndex === selectedView ? 'high' : 'auto'}
+            decoding="async"
+          />
         </div>
-        <figcaption><span class="view-label">{view.label}.</span> {view.caption}</figcaption>
+        <figcaption><p><span class="view-label">{view.label}.</span> {view.caption}</p><a class="text-link full-image" href={view.src.src}>Open full image<span class="visually-hidden">: {view.label}</span></a></figcaption>
       </figure>
     ))}
   </div>
@@ -64,6 +76,14 @@ const selectedView = Math.min(Math.max(initialView, 0), views.length - 1);
       inputs.forEach((input) => {
         input.addEventListener('change', () => selectView(Number(input.value)));
       });
+
+      // Back/Forward can restore native radio state after this element initializes.
+      window.addEventListener('pageshow', () => {
+        requestAnimationFrame(() => {
+          const checkedInput = this.querySelector<HTMLInputElement>('input:checked');
+          if (checkedInput) selectView(Number(checkedInput.value));
+        });
+      });
     }
   }
   if (!customElements.get('image-viewer')) customElements.define('image-viewer', ImageViewer);
@@ -71,21 +91,30 @@ const selectedView = Math.min(Math.max(initialView, 0), views.length - 1);
 
 <style>
   image-viewer { display: block; min-width: 0; }
-  .viewer-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1rem; }
-  .viewer-title { font-size: var(--text-small); color: var(--color-muted); }
-  fieldset { display: flex; flex-wrap: wrap; gap: 0.25rem; border: 0; padding: 0.25rem; margin: 0; background: var(--color-surface); border-radius: var(--radius-control); }
+  .viewer-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem 2rem; flex-wrap: wrap; margin-bottom: 0.75rem; }
+  .viewer-title { font-size: var(--text-small); color: var(--color-ink); }
+  fieldset { display: flex; flex-wrap: wrap; gap: 0.25rem; border: 0; padding: 0; margin: 0; }
   label { position: relative; cursor: pointer; }
   input { position: absolute; inset: 0; opacity: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
-  label span { display: flex; align-items: center; justify-content: center; min-height: 44px; padding: 0.5rem 0.95rem; border-radius: var(--radius-control); font-size: var(--text-small); font-weight: 500; }
-  input:checked + span { color: var(--color-paper); background: var(--color-pine); }
-  input:focus-visible + span { outline: 3px solid var(--color-pine); outline-offset: 3px; }
-  .viewer-description { margin-bottom: 1rem; max-width: 70ch; color: var(--color-muted); font-size: var(--text-small); }
+  label span { display: flex; align-items: center; justify-content: center; min-height: 44px; height: 100%; padding: 0.5rem 1rem; border: 1px solid var(--color-rule); border-radius: var(--radius-control); font-size: var(--text-small); color: var(--color-muted); transition: color var(--duration-feedback), border-color var(--duration-feedback); }
+  input:checked + span { color: var(--color-accent); border-color: var(--color-accent); background: var(--color-surface); }
+  input:focus-visible + span { outline: 3px solid var(--color-accent); outline-offset: 3px; }
+  .viewer-description { margin-bottom: 1.25rem; max-width: 75ch; color: var(--color-muted); font-size: var(--text-small); }
   figure + figure { margin-top: 1.5rem; }
   .enhanced figure { margin-top: 0; }
-  .image-stage { display: flex; align-items: center; justify-content: center; aspect-ratio: 3 / 2; background: var(--color-white); overflow: hidden; }
-  .image-stage img { width: 100%; height: 100%; object-fit: contain; }
-  figcaption { margin-top: 0.75rem; font-size: var(--text-small); line-height: 1.5; color: var(--color-muted); max-width: 80ch; min-height: 3em; }
+  .image-stage { display: flex; align-items: center; justify-content: center; aspect-ratio: 3 / 2; background: var(--color-surface); }
+  .image-stage :global(img) { width: 100%; height: 100%; object-fit: contain; }
+  figcaption { display: flex; justify-content: space-between; align-items: start; flex-wrap: wrap; gap: 0 1.5rem; margin-top: 0.75rem; font-size: var(--text-small); line-height: 1.6; color: var(--color-muted); min-height: 3em; }
+  figcaption p { flex: 1 1 36ch; padding-top: 0.5rem; }
+  .full-image { flex-shrink: 0; color: var(--color-accent); }
   .view-label { color: var(--color-ink); font-weight: 550; }
-  @media (hover: hover) and (pointer: fine) { input:not(:checked):hover + span { color: var(--color-pine); background: var(--color-paper); } }
-  @media (max-width: 640px) { label span { padding-inline: 0.8rem; } .viewer-toolbar { gap: 0.5rem; } }
+  @media (hover: hover) and (pointer: fine) { input:not(:checked):hover + span { color: var(--color-ink); border-color: var(--color-muted); } }
+  @media (max-width: 640px) {
+    label span { padding-inline: 0.8rem; }
+    .viewer-toolbar { align-items: flex-start; gap: 0.75rem; }
+    fieldset { width: 100%; }
+    label { flex: 1; }
+    .viewer-description { font-size: 0.8125rem; }
+    figcaption { gap: 0.25rem; }
+  }
 </style>

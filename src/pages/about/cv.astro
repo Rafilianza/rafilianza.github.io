@@ -1,0 +1,108 @@
+---
+import { getEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CvEntries from '../../components/CvEntries.astro';
+import ArrowIcon from '../../components/ArrowIcon.astro';
+
+const entry = await getEntry('profile', 'cv');
+if (!entry) throw new Error('Add the CV content at src/content/profile/cv.md.');
+const cv = entry.data;
+---
+<BaseLayout title={`CV | ${cv.name}`} description="Education, research, data science experience, mentoring, and technical skills of Muhammad Dhiaz Rafilianza.">
+  <article class="cv-page container">
+    <a class="text-link back-link" href="/about/">Back to About</a>
+    <header class="cv-intro">
+      <div class="cv-identity">
+        <p class="eyebrow">Experience &amp; education</p>
+        <h1>Curriculum <em>vitae.</em></h1>
+        <p class="cv-name">{cv.name}</p>
+        {cv.location && <p class="cv-location">{cv.location}</p>}
+      </div>
+      <div class="cv-overview">
+        <p class="cv-summary">{cv.summary}</p>
+        <div class="cv-actions">
+          {cv.pdf && <a class="button" href={cv.pdf} download>Download CV <span class="file-type">PDF</span> <ArrowIcon /></a>}
+          {cv.linkedin && <a class="text-link" href={cv.linkedin}>LinkedIn <ArrowIcon /></a>}
+          {cv.email && <a class="text-link email-link" href={`mailto:${cv.email}`}>{cv.email}</a>}
+        </div>
+      </div>
+    </header>
+    <div class="cv-layout">
+      <nav class="cv-navigation" aria-label="CV sections">
+        <p class="eyebrow">In this CV</p>
+        <ul>
+          {cv.sections.map((section) => <li><a class="text-link" href={`#${section.id}`}>{section.title}</a></li>)}
+          {cv.skills.length > 0 && <li><a class="text-link" href="#technical-skills">Technical skills</a></li>}
+        </ul>
+      </nav>
+      <div class="cv-content">
+        {cv.sections.map((section) => (
+          <section class="cv-section" aria-labelledby={section.id}>
+            <h2 id={section.id}>{section.title}</h2>
+            <CvEntries entries={section.entries} detailed />
+          </section>
+        ))}
+        {cv.skills.length > 0 && (
+          <section class="cv-section" aria-labelledby="technical-skills">
+            <h2 id="technical-skills">Technical skills</h2>
+            <dl class="skills">
+              {cv.skills.map((group) => (
+                <div><dt>{group.title}</dt><dd>{group.items.join(', ')}</dd></div>
+              ))}
+            </dl>
+          </section>
+        )}
+        <div class="cv-return">
+          {cv.pdf && <a class="text-link" href={cv.pdf} download>Download CV (PDF) <ArrowIcon /></a>}
+          <a class="text-link" href="/about/">Back to About</a>
+        </div>
+      </div>
+    </div>
+  </article>
+</BaseLayout>
+<style>
+  .cv-page { padding-bottom: 2rem; }
+  .back-link { margin-block: 1rem 2rem; color: var(--color-muted); font-size: 0.8125rem; }
+  .cv-intro { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 3rem 5rem; padding-bottom: 5rem; }
+  .cv-intro h1 { margin-top: 1.25rem; font-size: clamp(3rem, 6vw, 5rem); line-height: 1.05; font-weight: 400; }
+  .cv-intro h1 em { display: block; font-weight: 400; color: var(--color-accent); }
+  .cv-name { margin-top: 1.5rem; font-size: 0.9375rem; }
+  .cv-location { margin-top: 0.35rem; color: var(--color-muted); font-size: 0.8125rem; }
+  .cv-overview { padding-top: 1.75rem; min-width: 0; }
+  .cv-summary { max-width: var(--reading-width); font-size: 0.9375rem; color: var(--color-muted); line-height: 1.85; }
+  .cv-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1.5rem; margin-top: 1.5rem; }
+  .cv-actions .button, .cv-actions .text-link { font-size: 0.8125rem; }
+  .file-type { font-size: 0.6875rem; opacity: 0.7; }
+  .email-link { overflow-wrap: anywhere; }
+  .cv-layout { display: grid; grid-template-columns: 190px minmax(0, 1fr); align-items: start; gap: 4rem; padding-top: 3rem; border-top: 1px solid var(--color-rule); }
+  .cv-navigation { position: sticky; top: 2rem; font-size: 0.8125rem; }
+  .cv-navigation ul { list-style: none; margin: 1rem 0 0; padding: 0; }
+  .cv-navigation a { color: var(--color-muted); line-height: 1.5; padding-block: 0.35rem; }
+  .cv-navigation a:hover { color: var(--color-accent); }
+  .cv-content { min-width: 0; }
+  .cv-section + .cv-section { margin-top: 3.5rem; }
+  .cv-section h2 { font-size: clamp(2rem, 3vw, 2.75rem); line-height: 1.15; font-weight: 400; margin-bottom: 2rem; scroll-margin-top: 2rem; }
+  .skills { margin: 0; }
+  .skills > div { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); gap: 1rem 2rem; padding-block: 1.25rem; border-top: 1px solid var(--color-rule); }
+  .skills > div:first-child { padding-top: 0; border-top: 0; }
+  .skills dt { font-size: 0.9375rem; font-weight: 500; }
+  .skills dd { margin: 0; color: var(--color-muted); font-size: 0.9375rem; }
+  .cv-return { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem 1.5rem; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--color-rule); font-size: 0.8125rem; }
+  @media (max-width: 900px) {
+    .cv-intro { gap: 2rem 3rem; }
+    .cv-layout { grid-template-columns: 160px minmax(0, 1fr); gap: 2.5rem; }
+  }
+  @media (max-width: 760px) {
+    .cv-intro { grid-template-columns: 1fr; gap: 2rem; padding-bottom: 3rem; }
+    .cv-intro h1 em { display: inline; }
+    .cv-overview { padding-top: 0; }
+    .cv-layout { grid-template-columns: 1fr; gap: 2.5rem; padding-top: 2rem; }
+    .cv-navigation { position: static; }
+    .cv-navigation ul { display: flex; flex-wrap: wrap; gap: 0 1.25rem; margin-top: 0.5rem; }
+    .back-link { margin-bottom: 1.5rem; }
+  }
+  @media (max-width: 480px) {
+    .skills > div { grid-template-columns: 1fr; gap: 0.3rem; }
+    .cv-actions { gap: 0.5rem 1rem; }
+  }
+</style>

@@ -6,7 +6,7 @@ draft: true
 featured: false
 order: 2
 technologies: []
-# Tags are optional metadata; the current pages do not display them.
+# The first optional tag appears as the category above the project preview title.
 tags: []
 
 # Copy this file to src/content/projects/second-project/index.md.
@@ -18,9 +18,12 @@ tags: []
 # Add a real project date and describe your own contribution when known:
 # date: 2026-10-17
 # role: "Describe what you personally implemented or investigated."
+# finding: "State one observation supported by the available results."
+# limitation: "State the main boundary of what those results establish."
+# Finding and limitation are optional. Do not invent evaluation metrics or authorship.
 
-# Optional short workflow, shared by Projects and the case-study page.
-# Home shows only the first sorted project's compact preview, without steps.
+# Optional short workflow, shown after the main case-study image viewer.
+# Home and Projects use static previews without workflow steps or image controls.
 # Each step needs a title and a brief description. Use the actual project steps.
 # Omit this field when a sequence would not help explain the work.
 # steps:
@@ -35,16 +38,18 @@ tags: []
 #   src: ./images/cover.jpg
 #   alt: "Describe the important visual content of the cover."
 #   caption: "Explain what the image demonstrates."
-# Home uses this cover, or the first comparison image when the cover is omitted.
+# Home and Projects use this cover, or the first comparison image if omitted.
 # With neither a cover nor a comparison, the preview uses a text-only layout.
 
-# Add an optional gallery. Each image needs src and alt; captions are optional.
+# Optional end gallery. Prefer Markdown images beside relevant findings below.
+# Do not place the same figure in the body and this gallery.
+# Each image needs src and alt; captions are optional.
 # gallery:
 #   - src: ./images/result.png
 #     alt: "Describe the visible result."
 #     caption: "State the observation and any relevant limitation."
 
-# A comparison needs a title and at least two views.
+# A case-study comparison needs a title and at least two views.
 # Use actual corresponding outputs; do not improve or reconstruct model results.
 # comparison:
 #   title: "Inspect the example"
@@ -70,7 +75,19 @@ tags: []
 <!-- This is a writing template, not a real portfolio project. -->
 <!-- Keep only the sections that are useful for this project. -->
 
-## Problem
+## Results
+
+Describe what the available evidence shows. Pair each important finding with its
+image so readers can understand the result without reading the entire article.
+Include measured results only when their evaluation method is documented.
+
+<!-- After saving a real file, you can include an image inside the body:
+![Describe the important visual content.](./images/detail.png)
+
+Explain the observation or limitation shown above.
+-->
+
+## Why this approach
 
 Replace this paragraph with the problem, intended users, or research question.
 Explain why the work was worth exploring.
@@ -81,22 +98,17 @@ Explain what you built, changed, or investigated. Identify any pretrained models
 datasets, tools, tutorials, or existing code you used, and distinguish that work
 from your own contribution.
 
+<!-- Omit this entire section until the contribution is confirmed. -->
+
 ## Approach
 
 Describe the main steps and why you chose them. Explain unfamiliar terms in plain
 language and include enough detail for a reader to understand the method.
 
-## Results and limitations
+## Limitations
 
-Describe observations supported by the available examples. Include measured
-results only when their evaluation method is documented. Explain where the
-approach struggled and what these examples cannot establish.
-
-<!-- After saving a real file, you can also include images inside the body:
-![Describe the important visual content.](./images/detail.png)
-
-Explain the observation or limitation shown above.
--->
+Explain where the approach struggled, what the examples cannot establish,
+and what would need evaluation before drawing stronger conclusions.
 
 ## Lessons learned
 

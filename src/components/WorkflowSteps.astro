@@ -4,12 +4,14 @@ const { steps } = Astro.props;
 ---
 {steps.length > 0 && (
   <ol class="workflow" aria-label="How the approach works">
-    {steps.map((step) => <li><h3>{step.title}</h3><p>{step.description}</p></li>)}
+    {steps.map((step, stepIndex) => <li><span class="step-number" aria-hidden="true">{String(stepIndex + 1).padStart(2, '0')}</span><h3>{step.title}</h3><p>{step.description}</p></li>)}
   </ol>
 )}
 <style>
   .workflow { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); gap: 2rem 3rem; list-style: none; padding: 0; margin: 0; }
-  h3 { font-family: var(--font-body); font-size: 1.125rem; letter-spacing: -0.015em; font-weight: 550; }
-  p { margin-top: 0.65rem; max-width: 32ch; color: var(--color-muted); font-size: 1rem; }
-  @media (max-width: 640px) { .workflow { gap: 1.5rem; } }
+  li { border-top: 1px solid var(--color-rule); padding-top: 1.25rem; }
+  .step-number { display: block; margin-bottom: 1.5rem; color: var(--color-accent); font-size: 0.75rem; font-variant-numeric: tabular-nums; }
+  h3 { font-family: var(--font-display); font-size: 1.75rem; letter-spacing: -0.025em; font-weight: 400; }
+  p { margin-top: 0.75rem; max-width: 32ch; color: var(--color-muted); font-size: 0.9375rem; line-height: 1.7; }
+  @media (max-width: 640px) { .workflow { gap: 1.5rem; } .step-number { margin-bottom: 0.75rem; } }
 </style>

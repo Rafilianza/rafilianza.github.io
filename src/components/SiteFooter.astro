@@ -1,8 +1,37 @@
-<footer class="site-footer container">
-  <p>Muhammad Dhiaz Rafilianza</p>
-  <a class="text-link" href="https://github.com/Rafilianza">Explore my GitHub</a>
+---
+import { getEntry } from 'astro:content';
+import ArrowIcon from './ArrowIcon.astro';
+const cv = await getEntry('profile', 'cv');
+---
+<footer class="site-footer container" id="contact">
+  <div class="contact-heading">
+    <p class="eyebrow">Get in touch</p>
+    <h2>Good work starts<br />with a <em>conversation.</em></h2>
+  </div>
+  <div class="contact-details">
+    <p>For questions about my work, ideas to explore, or just to say hello.</p>
+    {cv?.data.email && <a class="email-link" href={'mailto:' + cv.data.email}>{cv.data.email} <ArrowIcon /></a>}
+    <div class="social-links">
+      {cv?.data.linkedin && <a class="text-link" href={cv.data.linkedin}>LinkedIn <ArrowIcon /></a>}
+      <a class="text-link" href="https://github.com/Rafilianza">GitHub <ArrowIcon /></a>
+      <a class="text-link" href="/about/cv/">CV <ArrowIcon /></a>
+    </div>
+  </div>
+  <div class="footer-colophon">
+    <p>© {new Date().getUTCFullYear()} {cv?.data.name ?? 'Muhammad Dhiaz Rafilianza'}</p>
+    {cv?.data.location && <p>{cv.data.location}</p>}
+  </div>
 </footer>
 <style>
-  .site-footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem 2rem; padding-block: 2rem; color: var(--color-muted); font-size: var(--text-small); }
-  .site-footer a { font-size: var(--text-small); }
+  .site-footer { display: grid; grid-template-columns: 1.2fr 1fr; gap: 3rem 5rem; border-top: 1px solid var(--color-rule); padding-top: clamp(3rem, 6vw, 5rem); margin-top: var(--space-7); }
+  h2 { margin-top: 1.25rem; font-size: clamp(2.5rem, 4.3vw, 3.75rem); line-height: 1.05; }
+  .contact-details { align-self: end; }
+  .contact-details > p { max-width: 33ch; color: var(--color-muted); font-size: var(--text-small); }
+  .email-link { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; min-height: 48px; margin-top: 1rem; width: fit-content; max-width: 100%; color: var(--color-accent); font-size: clamp(0.875rem, 1.6vw, 1.125rem); text-decoration: none; overflow-wrap: anywhere; }
+  .email-link:hover { text-decoration: underline; }
+  .email-link svg { width: 22px; height: 22px; flex-shrink: 0; transform: rotate(-45deg); }
+  .social-links { display: flex; flex-wrap: wrap; gap: 0.25rem 1.75rem; margin-top: 0.25rem; }
+  .social-links svg { width: 14px; height: 14px; transform: rotate(-45deg); }
+  .footer-colophon { grid-column: 1 / -1; display: flex; justify-content: space-between; gap: 0.5rem 2rem; flex-wrap: wrap; border-top: 1px solid var(--color-rule); padding-block: 1.5rem; margin-top: 1.25rem; color: var(--color-muted); font-size: 0.75rem; }
+  @media (max-width: 760px) { .site-footer { grid-template-columns: 1fr; gap: 2rem; margin-top: var(--space-6); } .contact-details > p { max-width: 45ch; } .footer-colophon { margin-top: 0.5rem; } }
 </style>

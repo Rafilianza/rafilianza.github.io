@@ -1,353 +1,203 @@
 ---
 name: Muhammad Dhiaz Rafilianza Portfolio
-description: A dark, image-led research journal for practical experiments in machine learning.
+description: An editorial portfolio for visual AI work, with a personal introduction and prominent evidence.
 colors:
-  paper: "#151b18"
-  surface: "#202a24"
-  ink: "#f1f4ed"
-  muted: "#b1bdb4"
-  pine: "#afd7bc"
-  pine-hover: "#c7e5d0"
+  paper: "#000000"
+  surface: "#111110"
+  ink: "#f4f1e9"
+  muted: "#aaa8a3"
+  accent: "#ff8a3d"
+  accent-hover: "#ffb17d"
+  rule: "#30302e"
   white: "#ffffff"
 typography:
   display:
     fontFamily: "'Newsreader Variable', Georgia, serif"
-    fontSize: "clamp(3rem, 6.8vw, 6rem)"
-    fontWeight: 450
-    lineHeight: 1.04
-    letterSpacing: "-0.025em"
+    fontSize: "clamp(3rem, 6.8vw, 5.75rem)"
+    fontWeight: 400
   headline:
     fontFamily: "'Newsreader Variable', Georgia, serif"
-    fontSize: "clamp(2rem, 3.5vw, 3.5rem)"
-    fontWeight: 450
-    lineHeight: 1.12
-    letterSpacing: "-0.025em"
-  title:
-    fontFamily: "'Newsreader Variable', Georgia, serif"
-    fontSize: "1.75rem"
-    fontWeight: 450
-    lineHeight: 1.25
-    letterSpacing: "-0.025em"
+    fontSize: "clamp(2rem, 3.6vw, 3rem)"
+    fontWeight: 400
   body:
     fontFamily: "'Archivo Variable', Arial, sans-serif"
-    fontSize: "1.0625rem"
-    fontWeight: 400
-    lineHeight: 1.65
-  lead:
-    fontFamily: "'Archivo Variable', Arial, sans-serif"
-    fontSize: "clamp(1.125rem, 1.6vw, 1.375rem)"
-    fontWeight: 400
-    lineHeight: 1.5
-  caption:
-    fontFamily: "'Archivo Variable', Arial, sans-serif"
-    fontSize: "0.875rem"
-    fontWeight: 400
-    lineHeight: 1.5
-  label:
-    fontFamily: "'Archivo Variable', Arial, sans-serif"
-    fontSize: "0.875rem"
-    fontWeight: 500
-    lineHeight: 1.65
-  control:
-    fontFamily: "'Archivo Variable', Arial, sans-serif"
     fontSize: "1rem"
-    fontWeight: 550
-    lineHeight: 1.65
-  step-title:
-    fontFamily: "'Archivo Variable', Arial, sans-serif"
-    fontSize: "1.125rem"
-    fontWeight: 550
-    lineHeight: 1.25
-    letterSpacing: "-0.015em"
-rounded:
-  control: "0.25rem"
-spacing:
-  "1": "0.5rem"
-  "2": "1rem"
-  "3": "1.5rem"
-  "4": "2rem"
-  "5": "3rem"
-  "6": "4.5rem"
-  "7": "7rem"
-  page-gutter: "clamp(1.25rem, 4vw, 4rem)"
-components:
-  button-primary:
-    backgroundColor: "{colors.pine}"
-    textColor: "{colors.paper}"
-    typography: "{typography.control}"
-    rounded: "{rounded.control}"
-    padding: "0.8rem 1.4rem"
-  button-primary-hover:
-    backgroundColor: "{colors.pine-hover}"
-    textColor: "{colors.paper}"
-  button-primary-active:
-    backgroundColor: "{colors.ink}"
-    textColor: "{colors.paper}"
-  text-link:
-    textColor: "{colors.ink}"
-  site-navigation:
-    backgroundColor: "{colors.surface}"
-    rounded: "{rounded.control}"
-    padding: "0.3rem"
-  site-navigation-link:
-    textColor: "{colors.ink}"
-    rounded: "{rounded.control}"
-    padding: "0.5rem 1.4rem"
-  site-navigation-selected:
-    backgroundColor: "{colors.pine}"
-    textColor: "{colors.paper}"
-  saved-view-group:
-    backgroundColor: "{colors.surface}"
-    rounded: "{rounded.control}"
-    padding: "0.25rem"
-  saved-view:
-    textColor: "{colors.ink}"
-    typography: "{typography.label}"
-    rounded: "{rounded.control}"
-    padding: "0.5rem 0.95rem"
-  saved-view-selected:
-    backgroundColor: "{colors.pine}"
-    textColor: "{colors.paper}"
-  saved-view-hover:
-    backgroundColor: "{colors.paper}"
-    textColor: "{colors.pine}"
-  draft-label:
-    backgroundColor: "{colors.surface}"
-    textColor: "{colors.ink}"
-    padding: "0.3rem 0.75rem"
-  workflow-step-title:
-    textColor: "{colors.ink}"
-    typography: "{typography.step-title}"
-  image-stage:
-    backgroundColor: "{colors.white}"
-  source-panel:
-    backgroundColor: "{colors.surface}"
-    padding: "{spacing.5}"
+    fontWeight: 400
+layout:
+  pageWidth: "1120px"
+  readingWidth: "65ch"
 ---
 
 # Design System: Muhammad Dhiaz Rafilianza
 
-## Overview
+## Direction
 
-**Creative North Star: "The Research Journal"**
+The user selected the Editorial concept and requested a site-wide overhaul on
+31 October 2026. This supersedes the earlier Home-only black/orange preview and
+the graphite/blue styling retained on inner pages. One identity now governs
+Home, Projects, About, the full CV, and case studies.
 
-The dark research journal pairs calm editorial typography with real
-experimental imagery.
-Visitors should understand the purpose and visible result quickly, then choose
-how deeply to read. The interface frames the work with spacious composition,
-short explanations, and direct navigation.
+The primary audience is AI and computer vision hiring teams. The experience
+should make Dhiaz's focus and industry background easy to understand, show
+actual work prominently, and invite a deeper reading of technical decisions.
+Regina Castro's portfolio informed the approachable overview-to-detail
+structure; the imagery, content, and visual composition remain Dhiaz's own.
 
-Each page is a normal scrolling document. It uses static reading, native controls,
-and modest state feedback. The colorful saved outputs provide visual variety;
-the surrounding interface stays quiet. Its identity comes from the relationship
-between serif headlines, practical sans-serif text, and unaltered evidence.
+Use a pure-black canvas, warm off-white text, and a warm orange accent.
+Newsreader supplies expressive display headings and selective italic emphasis;
+Archivo keeps body copy, navigation, captions, and controls practical. Both
+families are served locally through the existing Fontsource dependencies.
 
-**Key Characteristics:**
+Open layouts, strong changes in type scale, thin rules, and generous imagery
+create the hierarchy. Use surfaces only where they clarify a group or control.
+Avoid defaulting every section to a filled card, decorative gradients, glass,
+arbitrary multicolour badges, or motion that delays reading.
 
-- Image-led explanation with a short workflow before detailed prose.
-- Charcoal surfaces, soft white text, and a restrained mint accent.
-- Serif headings and readable sans-serif body text.
-- Full saved figures, honest captions, and visible limitations.
-- Flat surfaces, normal scrolling, and familiar controls.
+The user will update project content later. This design work preserves the
+existing project Markdown, original figures, source links, and factual limits.
+Do not add speculative projects, a fabricated portrait, invented personal
+interests, availability claims, or unsupported results to fill the layout.
 
-The frontmatter records the implemented design primitives. Keep it synchronized
-with `src/styles/tokens.css` and observed component styles when changing the
-system. `.impeccable/design.json` holds motion, breakpoint metadata, and component
-previews that the frontmatter schema cannot express.
+## Shared tokens and composition
 
-## Colors
+`src/styles/tokens.css` supplies the palette, fonts, spacing, type scales, and
+motion values. `src/styles/global.css` supplies shared document and prose
+styles. Component styles may refine a composition without introducing a
+competing palette or font system. Keep this document aligned with those files.
+Existing tool configuration is separate from the site's source of truth.
 
-The palette uses green-tinted charcoal, soft white, and pale mint, leaving
-saturated model output as the strongest color on the page. Existing token names
-remain stable: `paper` is the dark page canvas and `ink` is the light text.
+- `paper` is the page canvas; `surface` is a quiet supporting background.
+- `ink` is primary text; `muted` carries secondary context and captions.
+- `accent` identifies actions, active controls, focus, and selective emphasis.
+- `accent-hover` supplies brief control feedback; `rule` separates sections.
+- `white` preserves the original exported backgrounds of saved figures.
 
-### Primary
+All routes share a maximum content width of 1120px with fluid side gutters.
+Reading text stays within a comfortable measure, usually at most 65ch. Large
+headlines wrap naturally and reduce on smaller screens; never force a factual
+title onto one line or clip it to preserve a composition. Layouts reflow into
+one column when adjacent content would become cramped.
 
-- **Pale Mint** marks the main project link, selected saved view, meaningful links,
-  text selection, and keyboard focus.
-- **Light Mint** is the lighter hover state for the primary action.
+The site remains a dark theme without a theme switch. Colour must not carry
+meaning alone. Preserve readable contrast, visible keyboard focus, normal
+scrolling, browser zoom, and touch targets of at least 44px for navigation and
+image-view controls. Hover feedback is brief; reduced motion removes
+transitions. Essential content must not depend on a reveal or animation.
 
-### Neutral
+## Page hierarchy
 
-- **Charcoal Paper** is the page background and dark text on selected controls.
-- **Forest Surface** groups the About interests, source panel, workflow, navigation, saved-view controls,
-  and local draft status without a surrounding card border.
-- **Soft White Ink** carries headings and primary text.
-- **Muted Sage** carries captions, secondary explanations, and metadata.
-- **White** is the image-stage background, preserving exported figure margins.
+### Home
 
-**The Evidence Color Rule.** Interface colors frame the results; they do not
-recolor or cosmetically improve the saved images.
+The editorial opening, “How models see. How they imagine.”, introduces the
+subject alongside the existing biography from `homeIntroduction`. The next
+section presents the first sorted project as a static visual preview. Keep
+its purpose, intact image, supported finding, and case-study link together.
 
-This is a dark theme with no theme switch. Add another theme only as a deliberate
-design change with separately checked contrast and image framing.
+My Journey follows the work and contains at most three selected CV entries,
+ordered by `journeyOrder`. Titles, organisations, dates, existing short
+summaries, and optional verified topics provide context. Detailed duties and
+bullet points remain on the full CV. An About introduction offers a route to
+more personal context, followed by the shared contact footer.
 
-## Typography
+### Projects
 
-**Display Font:** Newsreader Variable, with Georgia and serif fallbacks.
-**Body Font:** Archivo Variable, with Arial and sans-serif fallbacks.
+Use static previews from the same project content entries as Home and the case
+studies. Purpose, a supported finding, optional confirmed contribution, and
+technologies help readers choose work. Do not place saved-view controls or a
+workflow in a listing. A single real project is a complete collection; missing
+images receive a deliberate text-only composition.
 
-Both fonts are served locally through their Fontsource packages. Their licenses
-are retained in `public/fonts/newsreader-OFL.txt` and
-`public/fonts/archivo-OFL.txt`. Newsreader
-gives headings an editorial character; Archivo makes labels, model names, and
-explanations easy to read. Monospace belongs to code examples rather than a
-decorative technical identity.
+The first optional project tag acts as a category above the title. Both Home
+and listing previews display a supplied image caption. The cover is preferred;
+the first saved comparison view is the fallback when a cover is absent.
 
-The frontmatter specifies the common display, headline, title, body, lead,
-caption, label, control, and workflow-title roles. Headings use balanced wrapping
-and restrained negative tracking. Prose is limited to the reading measure
-(`68ch`); the mobile body size becomes `1rem` at the compact-text breakpoint.
+### About
 
-Some surfaces adapt the common scale: homepage identity, project titles, About
-headings, and prose section headings have their own observed fluid sizes. Keep
-these adaptations close to their component instead of inventing a second type
-system. Long, factual project titles may wrap beyond two lines when needed;
-readability takes priority over forcing a uniform headline height.
+Give About a distinct role: explain Dhiaz's background and interests through
+the shared profile, with confirmed mentoring and team context. Link to the
+full CV for the complete chronology. Do not repeat the whole homepage or turn
+an unsupplied hobby or photo into biographical content.
 
-## Layout
+### Full CV
 
-The page container is centered with a maximum width (`1440px`) and fluid gutters
-from the spacing tokens. The spacing scale separates related content with small
-gaps and gives project sections substantially more breathing room.
+Keep the full CV readable as HTML with ordinary section navigation and the
+unchanged original PDF download. Use `CvEntries.astro` for the detailed
+entries, showing available dates, organisations, locations, summaries, and
+responsibilities. A desktop section index may remain sticky; it must become a
+normal wrapping list on narrow screens. The page scrolls naturally.
 
-Home (`/`), Projects (`/projects/`), and About (`/about/`) are separate pages with
-visible navigation. Home keeps the
-personal introduction and the first sorted project's compact image preview.
-The Projects page contains every visible project with its evidence viewer and short workflow.
-About contains the personal introduction and interests. Case studies remain
-directly linkable `/projects/<project-slug>/` pages with deeper explanations.
+### Case studies
 
-Project previews use an asymmetric desktop composition: a narrower text column
-beside a wider evidence image. They become one column at `850px`, ordered as
-introduction, evidence image, then details and the project link. Short workflow
-steps on Projects follow the project and wrap according to the available width;
-their minimum column size is `230px`. Workflow entries are content, not cards or
-decorative numbered labels.
+Lead with the project title and purpose, then make the primary visual result
+available early. Keep the finding and evidence limitation close to the figure
+rather than building a large block of preliminary text. Optional date and
+confirmed contribution remain visible when supplied. Section links are
+generated from the real Markdown headings.
 
-The case study places its main evidence view before the detailed article. Its
-viewer is limited to `1100px`. The article has a section-navigation column and
-the reading column; these stack at `750px`. Gallery figures use two columns,
-then one column at `720px`. At the same width the main navigation moves to its
-own full-width row beneath the wordmark and GitHub link. Typography and controls
-tighten at `640px` and `440px` where their actual components require it.
+The short workflow orients readers before the deeper narrative. Preserve the
+existing results, approach, limitations, lessons, and source links. Give
+supporting figures space beside the explanation they support. Original
+project copy remains editable through its Markdown entry.
 
-The header and case-study navigation remain in normal document flow. Preserve
-ordinary vertical scrolling, zoom, and reading order. Mobile does not require a
-drawer, a bottom navigation bar, or a separate application shell.
+## Navigation and contact
 
-## Elevation & Depth
+Home (`/`), Projects (`/projects/`), and About (`/about/`) remain real page links.
+Use consistent navigation across all routes, with a visible active state and
+`aria-current`. Projects stays active on `/projects/<slug>/`; About stays
+active on `/about/cv/`. Provide clear access to the CV and a Back to Projects
+route within each case study.
 
-The system is flat. It uses no shadows, blur, glass, or gradients. Whitespace,
-type hierarchy, and the Forest Surface background distinguish groups. Keyboard
-focus outlines communicate interaction state; they are not elevation effects.
+Direct loading, refreshing, and browser Back/Forward must display the correct
+page without requiring a visit to Home. Keep all primary destinations usable
+on phones. Do not replace the site with JavaScript-only tabs or a fixed-height
+application shell.
 
-## Shapes
+The shared footer gives a direct contact invitation and available email,
+LinkedIn, GitHub, and CV links. Read profile contact values from the shared
+entry. Omit unavailable links instead of rendering placeholder actions.
 
-Evidence stages and section surfaces are rectangular. Controls have the small
-control radius from the frontmatter. Avoid turning every paragraph or project
-into a rounded card. Use underlines for text links and table borders only where
-they clarify tabular structure; decorative dividing rules are unnecessary.
+## Evidence and image handling
 
-Full figures sit within their stages using `object-fit: contain`. The saved-view
-stage uses a `3 / 2` aspect ratio and gallery stages use `4 / 3`; these frame the
-entire image rather than crop it. Retain exported whitespace and model errors.
+The saved-image viewer belongs only on case studies. Its native radio fieldset
+is labelled **Saved image view**. Input, Mask overlay, and Annotated remain
+factual views of the first project's saved output, with Mask overlay initially
+selected. View switching is immediate. Without JavaScript, hide the controls
+and show every figure in document order.
 
-## Components
+Keep full-image links for small-label inspection. These open the original
+figure in the same tab, and browser Back returns to the case. The viewer must
+synchronise its visible image with a browser-restored radio selection.
 
-### Primary action and text links
+Astro generates responsive WebP display derivatives for previews, saved views,
+covers, and galleries. Previews use widths up to 1400px, and saved views and
+case covers use widths up to 1600px, without enlarging a smaller source. Retain
+the original files and their full-image links. Preserve whole figures,
+aspect ratios, margins, annotations, colours, and mistakes; use containment
+rather than a crop. Do not imply pixel alignment through a wipe when saved
+canvas sizes or margins differ. Do not retouch outputs or hide failure cases.
 
-The main action is a pale mint rectangle with dark text and a minimum height (`48px`).
-Its background changes on hover and press; the feedback duration is `160ms`
-with `cubic-bezier(0.23, 1, 0.32, 1)`. It does not translate or scale. Text links
-use underlines or a small arrow and a comfortable target height (`44px`).
+Narrative images belong beside their findings in Markdown. Do not duplicate
+those figures in the optional end gallery. A concise `finding` states what the
+evidence shows; a `limitation` states what it does not establish. Missing
+optional fields produce no empty labels. Use `role` only for confirmed personal
+contributions. The first project's code authorship remains unconfirmed.
 
-Keyboard focus is a mint outline (`3px`) offset from the control (`5px`). The
-saved-view labels have their own closer offset (`3px`). Reduced motion removes
-transitions and animation. Essential content never waits for a reveal.
+## Maintenance and verification
 
-### Navigation
-
-The serif wordmark links home. Home, Projects, and About are real page links grouped
-on Forest Surface, with the active destination shown in mint and dark text.
-They resemble a compact tab strip visually but retain link semantics and direct
-URLs. Projects stays active on case studies. GitHub is a separate link.
-
-**The Page Navigation Rule.** Every page has a real URL that loads directly and
-survives a refresh. Browser Back and Forward must restore the correct page and
-active navigation, with Projects active on case studies.
-
-All three destinations remain visible on phones; the navigation occupies a
-second row instead of hiding behind a menu. At `720px` and below, links share
-the row equally with horizontal padding (`0.75rem`). Case-study section links use the
-article's real headings. The skip link appears on focus and moves directly to
-the main content.
-
-### Project preview
-
-The preview uses the entry's title, summary, technologies, and shared image
-content. Home uses the compact cover preview of the first sorted entry, falling
-back to its first comparison image when there is no cover. Projects uses the
-full preview and available saved-view selector for every entry. The
-visual has more space than the text on desktop. Without an image,
-the preview becomes a readable single-column composition. Optional metadata
-does not leave an empty box or label.
-
-A single real project can fill the portfolio without filler cards. The saved
-still images are the visual material; no footage, live model session, or motion
-quota is implied.
-
-### Saved-view selector
-
-This is a native radio fieldset labeled **Saved image view**, not an ARIA tab
-widget. The first project's choices are **Input**, **Mask overlay**, and
-**Annotated**, with Mask overlay selected initially on Projects and the case study.
-Other projects supply their own factual labels through content.
-
-Each label has a minimum target height (`44px`). Checked state uses mint fill
-and dark text. Keyboard focus remains visible around the selected label;
-unselected hover feedback is gated to fine pointers that can hover. Image
-switching is immediate, with no wipe, crossfade, or implied live inference.
-
-The image stage contains each complete saved figure. Figures have descriptions,
-captions, and explicit dimensions. JavaScript enhances the viewer by exposing
-the radio controls and showing one figure at a time. Without JavaScript, the
-controls stay hidden and all figures remain in document order.
-
-**The Saved Evidence Rule.** Compare intact corresponding outputs. Different
-canvas margins do not justify a pixel-aligned wipe, a fabricated intermediate
-frame, or a cosmetic correction.
-
-### Workflow steps
-
-A semantic ordered list presents brief stage titles and one-sentence
-descriptions. List markers are visually hidden; spacing and source order carry
-the sequence. The same `steps` entry data supplies Projects and the case study.
-The full method remains available in the article.
-
-### Gallery and source panel
-
-The gallery preserves full images and uses captions to explain observations and
-limitations. The source panel groups only available, verified links on Forest
-Surface. A local draft label identifies unfinished entries; it is a status
-label, not a clickable chip.
-
-## Do's and Don'ts
-
-### Do:
-
-- Do lead with actual project imagery and a concise explanation.
-- Do reuse the shared tokens, layouts, and content-driven components.
-- Do preserve complete evidence images, captions, and visible limitations.
-- Do keep normal scrolling, text selection, zoom, and keyboard focus.
-- Do make essential content readable without JavaScript or interaction.
-- Do let long titles, links, and controls reflow on narrow screens.
-
-### Don't:
-
-- Don't invent metrics, testimonials, projects, or decorative status signals.
-- Don't crop away errors, recolor masks, or fabricate model outputs.
-- Don't add motion to the evidence, simulated inference, or scroll reveals.
-- Don't add glass, gradients, shadows, artificial numbering, or decorative rules.
-- Don't use monospace as decoration outside code examples.
-- Don't create empty cards, headings, or buttons for missing optional content.
+- Keep one Markdown source per project and a shared profile for biography,
+  contact, My Journey, and the full CV.
+- Replace the separate PDF deliberately when CV content changes; editing the
+  profile does not regenerate it.
+- Preserve expected December 2026 graduation, overlapping employment dates,
+  undated entries, source attribution, and all recorded evidence boundaries.
+- Distinguish individual contribution from pretrained models and libraries.
+- Do not invent benchmarks, testimonials, projects, or links.
+- Check desktop and narrow layouts, keyboard focus, reduced motion, readable
+  no-JavaScript content, original-image access, and control behaviour.
+- Check direct page and CV URLs, refresh and Back/Forward, active navigation,
+  image paths, the PDF download, and production draft exclusion.
+- Run `npm run check` and `npm run build` after relevant changes. Record actual
+  results separately; this checklist does not assert that a future edit passed.
+- Keep work local until publishing is explicitly requested. Do not commit,
+  push, run the manual deployment workflow, or change account settings merely
+  because a local design is complete.

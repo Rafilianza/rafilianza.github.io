@@ -15,12 +15,26 @@ the agreed design take priority over generic skill recommendations.
 - Put each project in `src/content/projects/<slug>/index.md`, with images beside
   it in `images/`. Use `docs/project-template.md` as the starting point.
 - The same entry supplies its Projects preview and case-study page. Home shows the
-  first sorted project's compact preview; Projects lists all visible projects.
-  Workflow steps appear on Projects and case studies. Reuse shared components,
-  layouts, project sorting, and visibility logic.
+  first sorted project's compact static preview; Projects lists all visible
+  projects as static summaries. Reserve image-view controls and workflow steps
+  for case studies. Reuse shared components, layouts, sorting, and visibility.
+- Use optional `finding` and `limitation` fields for the short case overview.
+  Reuse `role` only for confirmed personal contributions. Place narrative images
+  beside their findings in Markdown; do not duplicate them in an end gallery.
 - Keep Home (`/`), Projects (`/projects/`), and About (`/about/`) as separate real pages.
   Case studies retain their own `/projects/<slug>/` routes. Preserve active
-  navigation, with Projects highlighted on case studies.
+  navigation, with Projects highlighted on case studies and About on `/about/cv/`.
+- Keep `src/content/profile/cv.md` as the shared source for About's biography,
+  the full CV, and My Journey. Home shows at most three entries with
+  `journeyOrder`, sorted ascending, after the featured project. Show title,
+  available organisation, dates, a brief existing summary, and optional verified `journeyTopics` there,
+  with a View full CV link. Keep the optional `homeIntroduction` in this same
+  profile entry. Reuse
+  `CvEntries.astro` for Home and the detailed CV; keep detailed responsibilities
+  and bullet points on the full CV.
+- Keep the full CV readable as HTML with section navigation and a download of
+  `public/cv/muhammad-dhiaz-rafilianza.pdf`. The PDF is the unchanged original;
+  replacing it is separate from editing the web entry. Keep both versions aligned.
 - Use real page links. Direct URL loading, refreshing, and browser Back/Forward
   must display the correct page and active navigation without requiring a visit
   to Home first.
@@ -30,11 +44,24 @@ the agreed design take priority over generic skill recommendations.
   do not render empty sections or placeholder buttons.
 - Reuse `src/styles/tokens.css` and `src/styles/global.css`. Record deliberate
   design changes in `DESIGN.md` and durable factual context in `PRODUCT.md`.
+- The user selected the Editorial direction and requested a site-wide overhaul.
+  Use one shared identity across Home, Projects, About, the CV, and case studies:
+  pure black, warm off-white, orange accents, Newsreader display type, Archivo
+  body type, open compositions, and prominent intact project imagery. Keep real
+  page navigation and clear active states. The former Home-only palette split
+  is superseded by this direction.
+- The user will update project content later. Preserve existing project copy,
+  evidence, and source links during the design overhaul; do not add speculative
+  case studies, project claims, placeholder projects, or a fabricated portrait.
 
 ## Accuracy and evidence
 
 - Verify project claims against actual code and saved outputs. Ask about
   personal contributions or context the source cannot establish.
+- The supplied CV confirms personal background, but does not confirm ownership
+  of the Automatic Object Discovery code. Keep the Monash Master's completion
+  marked expected December 2026, retain overlapping employment dates, and omit
+  dates for undated research or leadership. Do not publish private source paths.
 - Distinguish the author's integration and experiments from pretrained models.
   Do not invent accuracy, speed, IoU, Dice, mAP, or other evaluation results.
 - The first featured pipeline demonstrates still images. Do not present README
@@ -57,8 +84,9 @@ the agreed design take priority over generic skill recommendations.
 - Use registered image views only when provenance supports alignment. Preserve
   full saved figures when their dimensions or margins differ.
 - Run relevant `npm run check` and `npm run build` checks. Inspect desktop and
-  mobile rendering, direct project URLs, images, links, draft exclusion, focus,
-  and reduced motion when affected. Report what was actually verified.
+  mobile rendering, direct project and CV URLs, images, links, the CV download,
+  draft exclusion, focus, and reduced motion when affected. Report what was
+  actually verified.
 - Keep README, template, schema, and implemented content behavior consistent.
   Test new content patterns with an unpublished draft.
 - Keep work local. Do not commit, push, publish, run the manual deployment

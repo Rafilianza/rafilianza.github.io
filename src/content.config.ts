@@ -17,6 +17,8 @@ const projects = defineCollection({
     return z.object({
       title: z.string().min(1),
       summary: z.string().min(1),
+      finding: z.string().min(1).optional(),
+      limitation: z.string().min(1).optional(),
       // New entries stay unpublished until their author explicitly opts in.
       draft: z.boolean().default(true),
       featured: z.boolean().default(false),
@@ -48,4 +50,37 @@ const projects = defineCollection({
   },
 });
 
-export const collections = { projects };
+const profile = defineCollection({
+  loader: glob({ base: "./src/content/profile", pattern: "*.md" }),
+  schema: z.object({
+    name: z.string().min(1),
+    summary: z.string().min(1),
+    homeIntroduction: z.string().min(1).optional(),
+    location: z.string().optional(),
+    email: z.email().optional(),
+    linkedin: z.url().optional(),
+    pdf: z.string().startsWith("/").endsWith(".pdf").optional(),
+    sections: z.array(z.object({
+      id: z.string().regex(/^[a-z0-9-]+$/),
+      title: z.string().min(1),
+      entries: z.array(z.object({
+        id: z.string().regex(/^[a-z0-9-]+$/),
+        title: z.string().min(1),
+        organisation: z.string().optional(),
+        // Keep the precision supplied by the CV, including expected dates.
+        dateLabel: z.string().optional(),
+        location: z.string().optional(),
+        summary: z.string().optional(),
+        details: z.array(z.string()).default([]),
+        journeyOrder: z.number().int().nonnegative().optional(),
+        journeyTopics: z.array(z.string().min(1)).default([]),
+      })).min(1),
+    })).min(1),
+    skills: z.array(z.object({
+      title: z.string().min(1),
+      items: z.array(z.string()).min(1),
+    })).default([]),
+  }),
+});
+
+export const collections = { projects, profile };

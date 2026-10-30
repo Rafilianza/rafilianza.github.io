@@ -3,8 +3,9 @@
 A personal portfolio about deep learning, computer vision, and diffusion models.
 The first case study is **Automatic Object Discovery and Segmentation**.
 
-The website uses Astro to turn project Markdown files into a compact homepage,
-a Projects listing, and individual case-study pages. About has its own page. Static
+The website uses Astro to turn project Markdown files into an editorial homepage,
+a Projects listing, and individual case-study pages. A shared CV entry supplies
+Home's My Journey summary, the About biography, and a full CV page. Static
 means the published site serves ordinary
 HTML, CSS, images, and a small amount of JavaScript; it does not need a running
 application server or a model backend.
@@ -46,24 +47,27 @@ changes automatically. Do not edit `dist/`; the next build replaces it.
 
 ```text
 src/
-  content.config.ts              Allowed project fields and defaults
+  content.config.ts              Allowed project and profile fields
   content/projects/
     <project-slug>/
       index.md                   One project's content and settings
       images/                    That project's images
+  content/profile/cv.md           Shared biography, CV entries, and skills
   components/                    Shared navigation, previews, and image views
   layouts/                       Shared page and case-study layouts
   lib/projects.ts                Shared project visibility and ordering
   pages/
-    index.astro                  Home: introduction and one project preview
-    about.astro                  About: interests and personal introduction
+    index.astro                  Home: introduction, project preview, journey, About
+    about.astro                  About: background, interests, and mentoring
+    about/cv.astro                Full CV with section links and PDF download
     projects/
-      index.astro                Projects: all visible projects and workflows
+      index.astro                Projects: static summaries of all visible projects
       [...id].astro              Generates individual project pages
   styles/
     tokens.css                   Colors, fonts, spacing, and motion values
     global.css                   Shared page and component styling
 public/                          Files copied directly into the built site
+  cv/muhammad-dhiaz-rafilianza.pdf Original downloadable CV
 docs/project-template.md         Reusable, unpublished project example
 .github/workflows/               Manual GitHub Pages deployment workflow
 PRODUCT.md                       Portfolio purpose and factual content context
@@ -78,13 +82,18 @@ project content.
 ## Add a project
 
 The Markdown entry is the single source for its Projects preview and case-study
-page. Home shows a compact preview of the first sorted project from that same
+page. Home shows a visual preview of the first sorted project from that same
 source. You do not need to add a separate card or copy the summary into another
 file.
 
+Home introduces you and one featured result. Projects helps visitors choose a
+case study. Only case studies include saved-image controls and workflow steps;
+their opening overview makes the main finding and limitation easy to find.
+
 The main navigation opens separate pages: **Home** (`/`), **Projects** (`/projects/`), and
 **About** (`/about/`). Each case study has its own `/projects/<slug>/` URL. Projects
-stays highlighted while reading a case study.
+stays highlighted while reading a case study. The full CV is at `/about/cv/`,
+with About highlighted.
 
 These are ordinary page links. The address bar should reflect each destination,
 each URL should open directly and survive a browser refresh, and the browser's
@@ -118,23 +127,27 @@ technologies: []
 tags: []
 ---
 
-## Problem
+## Results
+
+Describe what the available evidence demonstrates. Include measured results
+only when you can explain how they were evaluated.
+
+## Why this approach
 
 Describe the question you investigated or the problem you tried to solve.
 
 ## My contribution
 
 Explain what you personally built or tested, and identify the existing
-models, datasets, tools, or code you used.
+models, datasets, tools, or code you used. Omit this section until confirmed.
 
 ## Approach
 
 Describe the main steps and why you chose them.
 
-## Results and limitations
+## Limitations
 
-Describe what the available evidence demonstrates and where it falls short.
-Include measured results only when you can explain how they were evaluated.
+Describe where the evidence falls short and what remains untested.
 
 ## Lessons learned
 
@@ -161,17 +174,19 @@ publishing.
 | `title` | Real project title, used in both the preview and page. |
 | `slug` | Stable URL name such as `automatic-object-discovery`. |
 | `summary` | Short, factual description for the preview and metadata. |
+| `finding` | Optional concise observation supported by your evidence; shown in previews and the case overview. |
+| `limitation` | Optional main evidence boundary, shown near the case opening. |
 | `draft` | `true` while writing; `false` when ready to include in production. |
 | `featured` | `true` to sort this project before ordinary projects. Home shows the first sorted entry. |
 | `order` | Lower numbers appear first within featured or ordinary projects. |
 | `technologies` | Tools or models actually used. An empty list is fine. |
-| `tags` | Optional topic metadata, currently stored but not displayed. An empty list is fine. |
-| `steps` | Optional short workflow, with a `title` and `description` for each step. |
+| `tags` | Optional topic metadata. The first tag appears as the category above the preview title. An empty list is fine. |
+| `steps` | Optional case-study workflow, with a `title` and `description` for each step. |
 | `date` | Optional project date; use `YYYY-MM-DD` when known. |
 | `role` | Optional description of your personal contribution. |
 | `cover` | Optional preview image, with a source path and meaningful alternative text. |
-| `gallery` | Optional images with descriptions and captions. |
-| `comparison` | Optional verified image views for the shared comparison component. |
+| `gallery` | Optional end-of-article gallery; prefer inline images for findings explained in the narrative. |
+| `comparison` | Optional verified image views for the case-study comparison component. |
 | `links` | Optional repository, notebook, demo, or publication URLs. |
 
 Projects are sorted by **featured first, then order, then title**. Projects lists all
@@ -179,9 +194,13 @@ visible entries in this order; Home shows only the first one. Editing these
 fields updates both views. A project can still appear on Home when none are
 marked featured: the first entry by order and title is used.
 
-Home uses the selected project's cover image. If the cover is omitted but a
-comparison exists, Home uses its first image. With neither a cover nor a
-comparison, the preview uses a single text column without an empty image area.
+Home and Projects use static preview images. If the cover is omitted but a
+comparison exists, they use its first image. With neither a cover nor a
+comparison, the preview uses a text-only composition without an empty image area.
+The featured and listing variants of `ProjectPreview.astro` reuse the same entry;
+they change how much context is shown, without maintaining separate project copy.
+Both variants show the image caption when one is supplied. Astro generates
+responsive WebP previews so the browser can choose an appropriate display size.
 
 Drafts appear with a Draft label during local development. Production builds
 exclude drafts from Home, Projects, and generated project routes. Hiding a
@@ -206,10 +225,10 @@ steps:
 ```
 
 Replace these example steps with the project's actual workflow, or omit the
-field. The shared `WorkflowSteps.astro` component displays the same content on
-Projects and the case-study page. Home stays compact without workflow steps. Keep
-deeper explanations in the Markdown body
-so the short overview stays easy to scan.
+field. `WorkflowSteps.astro` displays the short sequence after the main case-study
+image viewer. Home and Projects contain no workflow. Keep the detailed explanation
+in an `## Approach` section in the Markdown body. The section links near the case
+opening are generated from your `##` headings.
 
 ### Add images
 
@@ -232,6 +251,27 @@ see the image. Captions explain why the figure matters. Include important
 findings and limitations in the surrounding text too; tiny labels inside an
 image are not an accessible explanation.
 
+Place an image beside the result it explains using ordinary Markdown:
+
+```md
+### What the example reveals
+
+![Describe the relevant objects and visible errors.](./images/result.webp)
+
+Explain the observation and its limits here.
+```
+
+Avoid adding that same image to `gallery`, which would display it again at the
+end. Use `gallery` for supporting images that do not need a place in the story.
+The case-study viewer also provides a full-image link for inspecting small labels.
+It opens in the same tab; use browser Back to return. The displayed figure stays
+in sync with the saved-image selection restored by browser Back/Forward.
+
+Preview, viewer, cover, and gallery components generate responsive display
+images through Astro. The case-study image links still open the original
+files, preserving full-resolution evidence. You do not need to make a separate
+thumbnail by hand or change the project's image paths.
+
 Use appropriately sized photographs and preserve evidence when preparing model
 outputs. Keep original masks and annotations intact, including imperfect
 results. Do not recolor, retouch, or crop away an error to improve a result's
@@ -253,6 +293,64 @@ article. It is **not currently required**. To adopt it later, add the official
 loader, and convert only entries that need it. Ordinary projects can remain
 Markdown.
 
+## Update the CV and My Journey
+
+Edit `src/content/profile/cv.md` to update the website's biography, CV, and
+My Journey summary together. Its YAML frontmatter contains `name`, `summary`,
+optional `homeIntroduction`, `location`, `email`, `linkedin`, `pdf`, `sections`,
+and `skills`. About uses the shared summary and links to the full CV and LinkedIn.
+The shared footer also reads available contact links from this entry.
+Use `homeIntroduction` for the brief homepage biography. If omitted, Home falls
+back to its existing interests sentence; it does not show an empty paragraph.
+
+Each section has an `id`, `title`, and at least one entry. Entries require an
+`id` and `title`; `organisation`, `dateLabel`, `location`, `summary`, and `details`
+are optional. Use `details` for the full CV's bullet points; omitting it gives an
+empty list. Skills are groups with a `title` and a nonempty `items` list; the
+whole `skills` field can be omitted. Keep IDs unique and stable because section
+and entry links use them. IDs use lowercase letters, numbers, and hyphens.
+
+The profile schema requires a nonempty `name` and `summary` and at least one
+section. Contact fields and `pdf` are optional. When present, email and LinkedIn
+must be valid addresses, and `pdf` must start with `/` and end with `.pdf`.
+Dates remain plain text so expected dates and the source CV's precision survive.
+
+Add `journeyOrder` to entries that should appear in Home's My Journey section.
+`journeyOrder` must be a nonnegative whole number. `JourneySummary.astro` selects
+at most three entries in ascending order and uses `CvEntries.astro` to show
+their titles, available organisations, dates, short summaries, and optional `journeyTopics` after
+the featured project. `journeyTopics` is a list of short, verified capability
+labels; keep it to two or three useful phrases. For example:
+
+```yaml
+journeyOrder: 1
+journeyTopics:
+  - "A/B testing"
+  - "Data pipelines"
+  - "Growth analytics"
+```
+
+Omitting `journeyTopics` defaults to an empty list, with no label group rendered.
+The labels appear only in Home's summary, not in the full CV's detailed entries.
+Omit `journeyOrder` to keep an entry only in the full CV. The **View full CV** link
+opens `/about/cv/`, where education, research, experience, leadership, and skills
+remain readable without JavaScript. The full CV reuses `CvEntries.astro` in its
+detailed mode to include locations, summaries, and bullet points.
+
+Keep the Master's completion date marked **expected December 2026** until it is
+confirmed. Preserve the source CV's overlapping employment dates and omit dates
+for undated research or leadership entries. Do not infer project authorship from
+the CV: the Automatic Object Discovery contribution is still unconfirmed.
+
+The download is the original PDF at `public/cv/muhammad-dhiaz-rafilianza.pdf`;
+editing `cv.md` does not regenerate it. When the CV changes, update the web entry
+and replace the PDF separately so both versions stay consistent. The `pdf` field
+uses its public URL, `/cv/muhammad-dhiaz-rafilianza.pdf`, never a private local path.
+
+Check My Journey, About, the full CV's section links, and the PDF download after
+editing. Open and refresh `/about/cv/` directly, then use Back and Forward to
+confirm that About remains the active navigation item.
+
 ## Change the shared design
 
 Edit `src/styles/tokens.css` to change shared colors, font families, spacing, or
@@ -264,14 +362,26 @@ component-specific behavior. Reuse existing tokens instead of creating a
 different color or spacing scale for each project. Record intentional visual
 changes in `DESIGN.md` and keep portfolio context in `PRODUCT.md` consistent.
 
+The shared Editorial design uses Newsreader for display headings and Archivo
+for body text, navigation, and controls. All pages use a pure-black canvas,
+warm off-white text, and orange accents, with a 1120px maximum content width.
+Open project compositions, prominent intact imagery, and thin section rules
+provide hierarchy. There is no separate Home-only palette.
+
+Shared accent tokens are `--color-accent` and `--color-accent-hover`;
+`--color-rule` supplies quiet dividers. Keep the purpose and visual result
+together, allow headings to wrap, and let complete figures and longer
+explanations scroll naturally. My Journey may display each selected entry's
+existing short summary; full responsibilities remain on the CV.
+
 Keep text contrast, visible keyboard focus, and reduced-motion behavior when
 changing colors or interactions. Evidence views must remain usable by touch and
 keyboard, and the essential explanation must remain available without switching
 views.
 
-Newsreader and Archivo are bundled locally through Fontsource. Keep their license
-copies at `public/fonts/newsreader-OFL.txt` and `public/fonts/archivo-OFL.txt` with
-the distributed site.
+Archivo and Newsreader are served locally through the existing Fontsource
+dependencies. Keep their licenses at `public/fonts/archivo-OFL.txt` and
+`public/fonts/newsreader-OFL.txt` with the distributed site.
 
 ## Build and GitHub Pages
 
@@ -288,12 +398,13 @@ npm run build
 npm run preview
 ```
 
-Check Home, Projects, About, and a direct project URL in the production preview.
-Open each URL directly and refresh it. Navigate from Home to Projects to a case
+Check Home, Projects, About, the full CV, and a direct project URL in the
+production preview. Open each URL directly and refresh it. Navigate from Home to Projects to a case
 study, then use Back and Forward and confirm that the page and active navigation
-stay correct. Projects should remain active on a case study. Confirm that images
-load and drafts do not appear. These commands are instructions for
-verification, not a statement that every future content change has passed them.
+stay correct. Projects should remain active on a case study, and About on the
+full CV. Confirm that images and the CV PDF load and drafts do not appear.
+These commands are instructions for verification, not a statement that every
+future content change has passed them.
 
 The GitHub Pages workflow is **manual only** (`workflow_dispatch`). A push does
 not trigger deployment. No publication or account-setting change is part of
@@ -333,8 +444,10 @@ Astro URL configuration and verify asset paths before deploying.
 
 - [ ] Use one content entry for the Projects preview, possible Home preview, and case-study page.
 - [ ] Confirm the title, summary, contribution, and links are factual.
+- [ ] Add a supported finding and main limitation when useful; omit unknown contributions.
 - [ ] Distinguish your work from pretrained models and existing libraries.
 - [ ] Add captions and alternative text; retain the original evidence.
+- [ ] Put each narrative image beside its finding and avoid duplicating it in the gallery.
 - [ ] Describe limitations and avoid unsupported performance claims.
 - [ ] Remove unused optional fields and empty sections.
 - [ ] Check desktop, small-phone, and landscape layouts.
